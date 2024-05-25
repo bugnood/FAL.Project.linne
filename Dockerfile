@@ -23,6 +23,6 @@ WORKDIR /usr/src/app
 COPY --from=react-builder /usr/src/app/client/build ./client/build
 COPY --from=express-builder /usr/src/app/server ./server
 
-EXPOSE 5000
+EXPOSE 5002
 
 CMD ["node", "./server/index.js"]
