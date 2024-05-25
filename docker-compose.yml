@@ -27,7 +27,29 @@ services:
     command: npx nodemon --legacy-watch index.ts
     networks:
       - linne_network
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=root
+      - DB_PASSWORD=example
+      - DB_NAME=mydatabase
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: mydatabase
+      # MYSQL_USER と MYSQL_PASSWORD を削除
+      # MYSQL_USER: root
+      # MYSQL_PASSWORD: example
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - linne_network
 
 networks:
   linne_network:
     driver: bridge
+
+volumes:
+  mysql-data:
