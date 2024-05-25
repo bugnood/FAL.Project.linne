@@ -1,11 +1,13 @@
 // client/src/components/Login.tsx
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [message, setMessage] = useState<string>('');
+  const navigate = useNavigate(); // 追加
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,6 +27,10 @@ const Login: React.FC = () => {
 
       const data = await response.json();
       setMessage(data.message);
+
+      if (data.message === '成功') {
+        navigate('/home'); // ログイン成功時にHome画面に遷移
+      }
     } catch (error) {
       setMessage('Login failed');
     }
