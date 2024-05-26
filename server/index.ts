@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import mysql from 'mysql2/promise';  // 追加
+import mysql from 'mysql2/promise';
 
 const app = express();
 const PORT = process.env.PORT || 5002;
@@ -14,19 +14,18 @@ const dbConfig = {
   database: process.env.DB_NAME || 'mydatabase',
 };
 
+// 初期化関数を呼び出してデータベース接続を確認
 async function initializeDatabase() {
   try {
     const connection = await mysql.createConnection(dbConfig);
     console.log('Connected to MySQL database');
-    // 必要に応じて初期化処理をここに追加できます
     await connection.end();
   } catch (error) {
     console.error('Unable to connect to MySQL database:', error);
-    process.exit(1);  // エラーの場合、プロセスを終了します
+    process.exit(1);
   }
 }
 
-// 初期化関数を呼び出してデータベース接続を確認
 initializeDatabase();
 
 app.get('/', (req, res) => {
@@ -36,7 +35,35 @@ app.get('/', (req, res) => {
 app.use(bodyParser.json());
 app.use(cors());
 
-app.post('/api/login', async (req: Request, res: Response) => {  // 修正
+// 投稿を取得するエンドポイントを追加
+app.get('/api/posts', async (req: Request, res: Response) => {
+  try {
+    const connection = await mysql.createConnection(dbConfig);
+    const [rows] = await connection.execute('SELECT * FROM posts');
+    await connection.end();
+    res.json(rows);
+  } catch (error) {
+    console.error('Database query error:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// 投稿を編集するエンドポイントを追加
+app.put('/api/posts', async (req: Request, res: Response) => {
+  const { id, content } = req.body;
+
+  try {
+    const connection = await mysql.createConnection(dbConfig);
+    await connection.execute('UPDATE posts SET content = ? WHERE id = ?', [content, id]);
+    await connection.end();
+    res.json({ message: 'Post updated successfully' });
+  } catch (error) {
+    console.error('Database query error:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+app.post('/api/login', async (req: Request, res: Response) => {
   const { username, password } = req.body;
 
   try {
