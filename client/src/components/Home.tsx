@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Home: React.FC = () => {
   const [posts, setPosts] = useState<any[]>([]); // 投稿の状態を保持するための状態変数
@@ -39,7 +40,7 @@ const Home: React.FC = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          id: posts[index].id,
+          id: posts[index].post_id, // 修正点
           content: editedContent,
         }),
       });
@@ -47,7 +48,6 @@ const Home: React.FC = () => {
         throw new Error('Failed to save post');
       }
       // サーバーからのレスポンスを取得してデータを更新する
-      const data = await response.json(); // レスポンスデータをJSON形式に変換
       setPosts(prevPosts => {
         const newPosts = [...prevPosts];
         newPosts[index].content = editedContent; // 投稿の内容を更新
@@ -64,10 +64,11 @@ const Home: React.FC = () => {
     <div>
       <h2>Home</h2>
       <p>Welcome to the Home page!</p>
+      <Link to="/create-post"><button>Create Post</button></Link>
       <h3>Posts</h3>
       <ul>
         {posts.map((post, index) => (
-          <li key={post.id}>
+          <li key={post.post_id}>
             {editMode === index ? (
               <div>
                 <input type="text" value={editedContent} onChange={(e) => setEditedContent(e.target.value)} />

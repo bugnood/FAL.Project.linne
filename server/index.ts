@@ -54,9 +54,27 @@ app.put('/api/posts', async (req: Request, res: Response) => {
 
   try {
     const connection = await mysql.createConnection(dbConfig);
-    await connection.execute('UPDATE posts SET content = ? WHERE id = ?', [content, id]);
+    await connection.execute('UPDATE posts SET content = ? WHERE post_id = ?', [content, id]);
     await connection.end();
     res.json({ message: 'Post updated successfully' });
+  } catch (error) {
+    console.error('Database query error:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// 新規投稿を作成するエンドポイントを追加
+app.post('/api/posts', async (req: Request, res: Response) => {
+  const { user_id, content, media, hashtags, mentions } = req.body;
+
+  try {
+    const connection = await mysql.createConnection(dbConfig);
+    const [result] = await connection.execute(
+      'INSERT INTO posts (user_id, content, media, hashtags, mentions) VALUES (?, ?, ?, ?, ?)',
+      [user_id, content, media, hashtags, mentions]
+    );
+    await connection.end();
+    res.json({ message: 'Post created successfully', post_id: (result as any).insertId });
   } catch (error) {
     console.error('Database query error:', error);
     res.status(500).json({ message: 'Internal server error' });
