@@ -2,37 +2,26 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getLoginUser } from '../services/loginLogic/authService';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [message, setMessage] = useState<string>('');
-  const navigate = useNavigate(); // 追加
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     try {
-      const response = await fetch('http://localhost:5002/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username, password })
-      });
+      const message = await getLoginUser(username, password);
+      setMessage(message);
 
-      if (!response.ok) {
-        throw new Error('Login failed');
-      }
-
-      const data = await response.json();
-      setMessage(data.message);
-
-      if (data.message === '成功') {
-        navigate('/home'); // ログイン成功時にHome画面に遷移
+      if (message === '成功') {
+        navigate('/home');
       }
     } catch (error) {
-      setMessage('Login failed');
+      setMessage('エラーが発生しました。担当者に連絡してください。');
     }
   };
 
@@ -56,6 +45,3 @@ const Login: React.FC = () => {
 };
 
 export default Login;
-
-// モジュールとして扱うための空の export ステートメント
-export {};
