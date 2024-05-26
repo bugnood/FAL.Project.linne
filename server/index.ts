@@ -117,6 +117,32 @@ app.delete('/api/posts/:id', async (req: Request, res: Response) => {
   }
 });
 
+// フォーム送信時の処理に対応するエンドポイントを追加
+app.post('/api/register', async (req: Request, res: Response) => {
+  const { username, email, password, full_name, bio, location, website, birth_date } = req.body;
+
+  try {
+    // ユーザー登録日時
+    const joined_date = new Date();
+
+    // データベースに接続
+    const connection = await mysql.createConnection(dbConfig);
+    // ユーザー情報をusersテーブルに挿入
+    const [result] = await connection.execute(
+      'INSERT INTO users (username, email, password, full_name, bio, location, website, birth_date, joined_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      [username, email, password, full_name, bio, location, website, birth_date, joined_date]
+    );
+    // データベース接続を閉じる
+    await connection.end();
+    // レスポンスを返す
+    res.status(201).json({ message: 'User registered successfully', user_id: (result as any).insertId });
+  } catch (error) {
+    // エラーハンドリング
+    console.error('Database query error:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
