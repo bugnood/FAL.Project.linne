@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import '../style/home.css';
 
 const Home: React.FC = () => {
   const [posts, setPosts] = useState<any[]>([]); // 投稿の状態を保持するための状態変数
@@ -61,23 +62,30 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="home-container">
       <h2>Home</h2>
       <p>Welcome to the Home page!</p>
-      <Link to="/create-post"><button>Create Post</button></Link>
+      <Link to="/create-post">
+        <button className="create-post-button">Create Post</button>
+      </Link>
       <h3>Posts</h3>
-      <ul>
+      <ul className="posts-list">
         {posts.map((post, index) => (
-          <li key={post.post_id}>
+          <li key={post.post_id} className="post-item">
             {editMode === index ? (
-              <div>
-                <input type="text" value={editedContent} onChange={(e) => setEditedContent(e.target.value)} />
-                <button onClick={() => handleSave(index)}>Save</button>
+              <div className="edit-container">
+                <input
+                  type="text"
+                  value={editedContent}
+                  onChange={(e) => setEditedContent(e.target.value)}
+                  className="edit-input"
+                />
+                <button onClick={() => handleSave(index)} className="save-button">Save</button>
               </div>
             ) : (
-              <div>
-                {post.content}
-                <button onClick={() => handleEdit(index)}>Edit</button>
+              <div className="post-content">
+                <p>{post.content}</p>
+                <button onClick={() => handleEdit(index)} className="edit-button">Edit</button>
               </div>
             )}
           </li>

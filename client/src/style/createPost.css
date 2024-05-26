@@ -1,0 +1,70 @@
+/* client/src/style/createPost.css */
+
+.create-post-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+  }
+  
+  .input-field {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+  }
+  
+  .input-field:focus {
+    border-color: #80bdff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+  }
+  
+  .post-button {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+  }
+  
+  .post-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* レスポンシブ対応 */
+  @media (max-width: 600px) {
+    .create-post-container {
+      padding: 10px;
+    }
+  
+    .input-field {
+      padding: 8px;
+      font-size: 14px;
+    }
+  
+    .post-button {
+      padding: 8px;
+      font-size: 16px;
+    }
+  }
+  

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getLoginUser } from '../services/loginLogic/authService';
+import '../style/login.css';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState<string>('');
@@ -26,20 +27,32 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="login-container">
       <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username:</label>
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+      <form onSubmit={handleSubmit} className="login-form">
+        <div className="form-group">
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="input-field"
+          />
         </div>
-        <div>
-          <label>Password:</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="input-field"
+          />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" className="login-button">Login</button>
       </form>
-      <p>{message}</p>
+      <p className="message">{message}</p>
     </div>
   );
 };

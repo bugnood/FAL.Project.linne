@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../style/createPost.css';
 
 const CreatePost: React.FC = () => {
   const [newPostContent, setNewPostContent] = useState<string>('');
@@ -36,13 +37,37 @@ const CreatePost: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="create-post-container">
       <h2>Create Post</h2>
-      <input type="text" placeholder="Content" value={newPostContent} onChange={(e) => setNewPostContent(e.target.value)} />
-      <input type="text" placeholder="Media" value={media} onChange={(e) => setMedia(e.target.value)} />
-      <input type="text" placeholder="Hashtags" value={hashtags} onChange={(e) => setHashtags(e.target.value)} />
-      <input type="text" placeholder="Mentions" value={mentions} onChange={(e) => setMentions(e.target.value)} />
-      <button onClick={handleCreatePost}>Post</button>
+      <input
+        type="text"
+        placeholder="Content"
+        value={newPostContent}
+        onChange={(e) => setNewPostContent(e.target.value)}
+        className="input-field"
+      />
+      <input
+        type="text"
+        placeholder="Media"
+        value={media}
+        onChange={(e) => setMedia(e.target.value)}
+        className="input-field"
+      />
+      <input
+        type="text"
+        placeholder="Hashtags"
+        value={hashtags}
+        onChange={(e) => setHashtags(e.target.value)}
+        className="input-field"
+      />
+      <input
+        type="text"
+        placeholder="Mentions"
+        value={mentions}
+        onChange={(e) => setMentions(e.target.value)}
+        className="input-field"
+      />
+      <button onClick={handleCreatePost} className="post-button">Post</button>
     </div>
   );
 };
