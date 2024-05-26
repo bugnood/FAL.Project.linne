@@ -102,6 +102,21 @@ app.post('/api/login', async (req: Request, res: Response) => {
   }
 });
 
+// 投稿を削除するエンドポイントを追加
+app.delete('/api/posts/:id', async (req: Request, res: Response) => {
+  const postId = req.params.id;
+
+  try {
+    const connection = await mysql.createConnection(dbConfig);
+    await connection.execute('DELETE FROM posts WHERE post_id = ?', [postId]);
+    await connection.end();
+    res.json({ message: 'Post deleted successfully' });
+  } catch (error) {
+    console.error('Database query error:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

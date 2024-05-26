@@ -61,17 +61,32 @@ const Home: React.FC = () => {
     }
   };
 
+  // 投稿を削除する関数
+  const handleDelete = async (index: number) => {
+    try {
+      const response = await fetch(`http://localhost:5002/api/posts/${posts[index].post_id}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) {
+        throw new Error('Failed to delete post');
+      }
+      setPosts(prevPosts => prevPosts.filter((_, i) => i !== index)); // 削除された投稿を除外する
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="home-container">
-      <h2>Home</h2>
-      <p>Welcome to the Home page!</p>
+      <h2>ホーム画面</h2>
+      <p>楽しく日常を呟こう！</p>
       <Link to="/create-post">
-        <button className="create-post-button">Create Post</button>
+        <button className="create-post-button">新規投稿</button>
       </Link>
-      <h3>Posts</h3>
-      <ul className="posts-list">
+      <h3>投稿一覧</h3>
+      <div className="posts-grid">
         {posts.map((post, index) => (
-          <li key={post.post_id} className="post-item">
+          <div key={post.post_id} className="post-card">
             {editMode === index ? (
               <div className="edit-container">
                 <input
@@ -85,12 +100,15 @@ const Home: React.FC = () => {
             ) : (
               <div className="post-content">
                 <p>{post.content}</p>
-                <button onClick={() => handleEdit(index)} className="edit-button">Edit</button>
+                <div>
+                  <button onClick={() => handleEdit(index)} className="edit-button">Edit</button>
+                  <button onClick={() => handleDelete(index)} className="delete-button">Delete</button>
+                </div>
               </div>
             )}
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

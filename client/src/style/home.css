@@ -1,117 +1,111 @@
-/* client/src/style/home.css */
-
+/* 全体レイアウト */
 .home-container {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
   }
   
   h2 {
+    font-size: 2rem;
     color: #333;
-    margin-bottom: 20px;
-    font-family: 'Arial', sans-serif;
-    font-size: 24px;
   }
   
   .create-post-button {
-    padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #4CAF50;
     color: white;
     border: none;
+    padding: 10px 20px;
+    margin: 10px 0;
     border-radius: 5px;
     cursor: pointer;
-    font-family: 'Arial', sans-serif;
-    font-size: 16px;
-    margin-bottom: 20px;
+    font-size: 1rem;
   }
   
   .create-post-button:hover {
-    background-color: #0056b3;
+    background-color: #45a049;
   }
   
-  .posts-list {
-    list-style-type: none;
-    padding: 0;
+  h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-top: 20px;
   }
   
-  .post-item {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
-    text-align: left;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  }
-  
-  .post-content {
+  /* 投稿カードのレイアウト */
+  .posts-grid {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .post-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: calc(33.333% - 20px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .post-content p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .edit-button,
+  .save-button,
+  .delete-button {
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    align-self: flex-end;
+  }
+  
+  .edit-button:hover,
+  .save-button:hover,
+  .delete-button:hover {
+    background-color: #007BB5;
   }
   
   .edit-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
   }
   
   .edit-input {
-    width: calc(100% - 90px);
-    padding: 8px;
-    margin-right: 10px;
-    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
     border-radius: 5px;
   }
-  
-  .edit-input:focus {
-    border-color: #80bdff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+
+  /* 削除ボタン */
+  .delete-button {
+    background-color: #f44336;
   }
   
-  .save-button,
-  .edit-button {
-    padding: 6px 12px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: 'Arial', sans-serif;
-    font-size: 14px;
+  .delete-button:hover {
+    background-color: #d32f2f;
   }
   
-  .save-button:hover,
-  .edit-button:hover {
-    background-color: #218838;
+  /* レスポンシブデザイン */
+  @media (max-width: 768px) {
+    .post-card {
+      width: calc(50% - 20px);
+    }
   }
   
-  /* レスポンシブ対応 */
-  @media (max-width: 600px) {
-    .home-container {
-      padding: 10px;
-    }
-  
-    .create-post-button {
-      padding: 8px 16px;
-      font-size: 14px;
-    }
-  
-    .edit-input {
-      width: calc(100% - 80px);
-      padding: 6px;
-      font-size: 14px;
-    }
-  
-    .save-button,
-    .edit-button {
-      padding: 5px 10px;
-      font-size: 12px;
+  @media (max-width: 480px) {
+    .post-card {
+      width: 100%;
     }
   }
   
