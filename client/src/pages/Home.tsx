@@ -1,38 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FaHeart, FaStar } from 'react-icons/fa';
 import '../style/home.css';
 
 const Home: React.FC = () => {
-  const [posts, setPosts] = useState<any[]>([]); // 投稿の状態を保持するための状態変数
-  const [editMode, setEditMode] = useState<number | null>(null); // 編集モードを管理する状態変数
-  const [editedContent, setEditedContent] = useState<string>(''); // 編集中の投稿内容を保持する状態変数
+  const [posts, setPosts] = useState<any[]>([]);
+  const [editMode, setEditMode] = useState<number | null>(null);
+  const [editedContent, setEditedContent] = useState<string>('');
 
   useEffect(() => {
-    // API経由で投稿を取得する関数を定義
     const fetchPosts = async () => {
       try {
-        const response = await fetch('http://localhost:5002/api/posts'); // APIのエンドポイントにリクエストを送信
+        const response = await fetch('http://localhost:5002/api/posts');
         if (!response.ok) {
           throw new Error('Failed to fetch posts');
         }
-        const data = await response.json(); // レスポンスデータをJSON形式に変換
-        setPosts(data); // 取得した投稿データを状態変数にセット
+        const data = await response.json();
+        setPosts(data);
       } catch (error) {
         console.error(error);
-        setPosts([]); // エラーが発生した場合、空の配列をセットしてエラーを解決
+        setPosts([]);
       }
     };
-  
-    fetchPosts(); // 関数を呼び出し、投稿を取得する
+
+    fetchPosts();
   }, []);
 
-  // 投稿内容を編集する関数
   const handleEdit = (index: number) => {
-    setEditMode(index); // 編集モードに切り替える
-    setEditedContent(posts[index].content); // 編集中の投稿内容をセットする
+    setEditMode(index);
+    setEditedContent(posts[index].content);
   };
 
-  // 編集モードでの投稿内容を保存する関数
   const handleSave = async (index: number) => {
     try {
       const response = await fetch('http://localhost:5002/api/posts', {
@@ -41,27 +39,24 @@ const Home: React.FC = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          id: posts[index].post_id, // 修正点
+          id: posts[index].post_id,
           content: editedContent,
         }),
       });
       if (!response.ok) {
         throw new Error('Failed to save post');
       }
-      // サーバーからのレスポンスを取得してデータを更新する
       setPosts(prevPosts => {
         const newPosts = [...prevPosts];
-        newPosts[index].content = editedContent; // 投稿の内容を更新
+        newPosts[index].content = editedContent;
         return newPosts;
       });
-      // 編集モードを解除する
       setEditMode(null);
     } catch (error) {
       console.error(error);
     }
   };
 
-  // 投稿を削除する関数
   const handleDelete = async (index: number) => {
     try {
       const response = await fetch(`http://localhost:5002/api/posts/${posts[index].post_id}`, {
@@ -70,7 +65,47 @@ const Home: React.FC = () => {
       if (!response.ok) {
         throw new Error('Failed to delete post');
       }
-      setPosts(prevPosts => prevPosts.filter((_, i) => i !== index)); // 削除された投稿を除外する
+      setPosts(prevPosts => prevPosts.filter((_, i) => i !== index));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleLike = async (index: number) => {
+    const postId = posts[index].post_id;
+    try {
+      const response = await fetch(`http://localhost:5002/api/posts/like/${postId}`, {
+        method: 'PUT',
+      });
+      if (!response.ok) {
+        throw new Error('Failed to update like count');
+      }
+      const data = await response.json();
+      setPosts((prevPosts) => {
+        const newPosts = [...prevPosts];
+        newPosts[index].likes_count = data.likes_count;
+        return newPosts;
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleFavorite = async (index: number) => {
+    const postId = posts[index].post_id;
+    try {
+      const response = await fetch(`http://localhost:5002/api/posts/favorite/${postId}`, {
+        method: 'PUT',
+      });
+      if (!response.ok) {
+        throw new Error('Failed to update favorite count');
+      }
+      const data = await response.json();
+      setPosts((prevPosts) => {
+        const newPosts = [...prevPosts];
+        newPosts[index].favorite_count = data.favorite_count;
+        return newPosts;
+      });
     } catch (error) {
       console.error(error);
     }
@@ -100,9 +135,17 @@ const Home: React.FC = () => {
             ) : (
               <div className="post-content">
                 <p>{post.content}</p>
-                <div>
+                <div className="button-container">
                   <button onClick={() => handleEdit(index)} className="edit-button">Edit</button>
                   <button onClick={() => handleDelete(index)} className="delete-button">Delete</button>
+                  <button onClick={() => handleLike(index)} className="like-button">
+                    <FaHeart color="red" />
+                    <span>{post.likes_count}</span>
+                  </button>
+                  <button onClick={() => handleFavorite(index)} className="favorite-button">
+                    <FaStar color="yellow" />
+                    <span>{post.favorite_count}</span>
+                  </button>
                 </div>
               </div>
             )}

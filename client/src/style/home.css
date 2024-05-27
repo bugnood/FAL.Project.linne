@@ -1,111 +1,141 @@
 /* 全体レイアウト */
 .home-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  h2 {
-    font-size: 2rem;
-    color: #333;
-  }
-  
-  .create-post-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 10px 0;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-  }
-  
-  .create-post-button:hover {
-    background-color: #45a049;
-  }
-  
-  h3 {
-    font-size: 1.5rem;
-    color: #333;
-    margin-top: 20px;
-  }
-  
-  /* 投稿カードのレイアウト */
-  .posts-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .post-card {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: calc(33.333% - 20px);
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .post-content p {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 10px;
-  }
-  
-  .edit-button,
-  .save-button,
-  .delete-button {
-    background-color: #008CBA;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    align-self: flex-end;
-  }
-  
-  .edit-button:hover,
-  .save-button:hover,
-  .delete-button:hover {
-    background-color: #007BB5;
-  }
-  
-  .edit-container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .edit-input {
-    padding: 10px;
-    font-size: 1rem;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
 
-  /* 削除ボタン */
-  .delete-button {
-    background-color: #f44336;
+h2 {
+  font-size: 2rem;
+  color: #333;
+}
+
+.create-post-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 0;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.create-post-button:hover {
+  background-color: #45a049;
+}
+
+h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-top: 20px;
+}
+
+/* 投稿カードのレイアウト */
+.posts-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.post-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: calc(33.333% - 20px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-content p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.edit-button,
+.save-button,
+.delete-button {
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  align-self: flex-end;
+}
+
+.edit-button:hover,
+.save-button:hover,
+.delete-button:hover {
+  background-color: #007BB5;
+}
+
+.edit-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-input {
+  padding: 10px;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* 削除ボタン */
+.delete-button {
+  background-color: #f44336;
+}
+
+.delete-button:hover {
+  background-color: #d32f2f;
+}
+
+/* ボタンコンテナ */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.like-button,
+.favorite-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 5px;
+  margin-left: 5px;
+}
+
+.like-button:hover,
+.favorite-button:hover {
+  opacity: 0.7;
+}
+
+/* ボタンのカウント表示 */
+.like-button span,
+.favorite-button span {
+  margin-left: 5px;
+  font-size: 1rem;
+  color: #555;
+}
+
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .post-card {
+    width: calc(50% - 20px);
   }
-  
-  .delete-button:hover {
-    background-color: #d32f2f;
+}
+
+@media (max-width: 480px) {
+  .post-card {
+    width: 100%;
   }
-  
-  /* レスポンシブデザイン */
-  @media (max-width: 768px) {
-    .post-card {
-      width: calc(50% - 20px);
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .post-card {
-      width: 100%;
-    }
-  }
-  
+}

@@ -143,6 +143,36 @@ app.post('/api/register', async (req: Request, res: Response) => {
   }
 });
 
+// いいね数を増やすエンドポイント
+app.put('/api/posts/like/:id', async (req: Request, res: Response) => {
+  const postId = req.params.id;
+  try {
+    const connection = await mysql.createConnection(dbConfig);
+    await connection.execute('UPDATE posts SET likes_count = likes_count + 1 WHERE post_id = ?', [postId]);
+    const [rows] = await connection.execute('SELECT likes_count FROM posts WHERE post_id = ?', [postId]);
+    await connection.end();
+    res.status(200).json({ likes_count: (rows as any)[0].likes_count });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: 'Failed to update like count' });
+  }
+});
+
+// お気に入り数を増やすエンドポイント
+app.put('/api/posts/favorite/:id', async (req: Request, res: Response) => {
+  const postId = req.params.id;
+  try {
+    const connection = await mysql.createConnection(dbConfig);
+    await connection.execute('UPDATE posts SET favorite_count = favorite_count + 1 WHERE post_id = ?', [postId]);
+    const [rows] = await connection.execute('SELECT favorite_count FROM posts WHERE post_id = ?', [postId]);
+    await connection.end();
+    res.status(200).json({ favorite_count: (rows as any)[0].favorite_count });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: 'Failed to update favorite count' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
