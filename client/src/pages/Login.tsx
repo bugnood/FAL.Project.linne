@@ -3,8 +3,6 @@ import FormField from '../components/FormField';
 import { useLogin } from '../hooks/useLogin';
 import '../style/login.css';
 
-// Login コンポーネントは、ユーザーがログインできるフォームを提供します。
-// 状態管理とロジックは useLogin フックに委譲しています。
 const Login: React.FC = () => {
   const {
     username,
@@ -16,28 +14,31 @@ const Login: React.FC = () => {
   } = useLogin();
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
-      <form onSubmit={handleLogin} className="login-form">
-        <FormField
-          id="username"
-          label="Username:"
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="input-field"
-        />
-        <FormField
-          id="password"
-          label="Password:"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="input-field"
-        />
-        <button type="submit" className="login-button">Login</button>
-      </form>
-      <p className="message">{message}</p>
+    <div className='container'>
+      <div className="login-container">
+        <img src={""} alt="Linne Logo" />
+        <form onSubmit={handleLogin} className="login-form">
+          <FormField
+            id="username"
+            label="ユーザー名 または メールアドレス"
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="input-field"
+          />
+          <FormField
+            id="password"
+            label="パスワード"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="input-field"
+          />
+          <button type="submit" className="login-button">ログイン</button>
+        </form>
+        <p className="message">{message}</p>
+        <a href="/forgot-password" className="forgot-password">パスワードをお忘れの方</a>
+      </div>
     </div>
   );
 };
