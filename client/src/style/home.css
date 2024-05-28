@@ -1,5 +1,11 @@
 .home-container {
   max-width: 700px;
+  height: calc(100vh - 96px);
+  overflow-y: scroll;
+}
+
+.home-container::-webkit-scrollbar {
+  display: none;
 }
 
 .post-content-area {

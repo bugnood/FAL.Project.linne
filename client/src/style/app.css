@@ -42,13 +42,13 @@ body {
   
   main {
     flex: 1;
-    padding: 1rem;
+    /* padding: 1rem; */
     background-color: #ffffff;
     /* border-radius: 8px; */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     /* margin: 1rem; */
-    height: calc(100vh - 8rem);
-    overflow-y: scroll;
+    /* height: calc(100vh - 8rem);
+    overflow-y: scroll; */
   }
   
   footer {

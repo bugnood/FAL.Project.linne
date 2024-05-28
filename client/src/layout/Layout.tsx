@@ -14,7 +14,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <Header />
       <div style={{ display: 'flex', flex: '1' }}>
         <Sidebar />
-        <main style={{ flex: '1', padding: '1rem' }}>
+        <main style={{ flex: '1'}}>
           {children}
         </main>
       </div>
