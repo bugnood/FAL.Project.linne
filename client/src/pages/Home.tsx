@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaHeart, FaStar } from 'react-icons/fa';
 import '../style/home.css';
+import miraiSpectrumIcon from '../assets/mirai-spectrum_icon.png';
 
 const Home: React.FC = () => {
   const [posts, setPosts] = useState<any[]>([]);
@@ -113,14 +114,39 @@ const Home: React.FC = () => {
 
   return (
     <div className="home-container">
-      <h2>ホーム画面</h2>
+      {/* <h2>ホーム画面</h2>
       <p>楽しく日常を呟こう！</p>
       <Link to="/create-post">
         <button className="create-post-button">新規投稿</button>
       </Link>
-      <h3>投稿一覧</h3>
-      <div className="posts-grid">
+      <h3>投稿一覧</h3> */}
+      <div className="home-post">
         {posts.map((post, index) => (
+          <div key={post.post_id} className='post-content-area'>
+            <div className='post-left-area'>
+              <img src={miraiSpectrumIcon} alt='プロフィールアイコン' className='user-icon' />
+            </div>
+            <div className='post-right-area'>
+              <div className='user-info'>
+                <p className='user-name'>ユーザー名</p>
+                <p className='user-id'>ユーザーID</p>
+              </div>
+              <p className='post-content'>{post.content}</p>
+              <div className='reaction-button'>
+                <button onClick={() => handleLike(index)} className="like-button">
+                  <FaHeart color="red" />
+                  <span>{post.likes_count}</span>
+                </button>
+                <button onClick={() => handleFavorite(index)} className="favorite-button">
+                  <FaStar color="yellow" />
+                  <span>{post.favorite_count}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+
+        {/* {posts.map((post, index) => (
           <div key={post.post_id} className="post-card">
             {editMode === index ? (
               <div className="edit-container">
@@ -150,7 +176,7 @@ const Home: React.FC = () => {
               </div>
             )}
           </div>
-        ))}
+        ))} */}
       </div>
     </div>
   );
