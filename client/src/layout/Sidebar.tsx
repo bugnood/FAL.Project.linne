@@ -4,7 +4,7 @@ import '../style/app.css';
 
 const Sidebar: React.FC = () => {
   return (
-    <aside style={{ width: '200px', backgroundColor: '#f4f4f4', padding: '1rem' }}>
+    <aside>
       <nav>
         <ul>
           <li><Link to="/home">タイムライン</Link></li>

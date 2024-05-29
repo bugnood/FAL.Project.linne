@@ -10,11 +10,11 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div>
       <Header />
-      <div style={{ display: 'flex', flex: '1' }}>
+      <div className='content'>
         <Sidebar />
-        <main style={{ flex: '1'}}>
+        <main>
           {children}
         </main>
       </div>
