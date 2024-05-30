@@ -7,7 +7,7 @@
     justify-content: center;
     flex-wrap: wrap;
     /* 画面サイズに応じて子要素が折り返されるようにする */
-    padding: 20px;
+    /* padding: 20px; */
     /* 余白を追加 */
 }
 
@@ -108,13 +108,13 @@
     .top-container {
         flex-direction: row;
         /* 横並びにする */
-        padding: 40px;
+        /* padding: 40px; */
         /* 余白を増やす */
     }
 
     .top-container-left-area,
     .top-container-right-area {
-        flex: 1;
+        /* flex: 1; */
         /* 各エリアが均等に幅を取る */
         max-width: none;
         /* 最大幅を解除 */
@@ -130,5 +130,11 @@
     .top-participation-button {
         align-items: flex-start;
         /* 左揃えに戻す */
+    }
+}
+
+@media (max-width: 768px) {
+    .top-container {
+        padding: 20px;
     }
 }
