@@ -1,0 +1,90 @@
+/*** content ***/
+.top-container {
+    min-height: 100vh;
+    /* background-color: #20c4cc; */
+    background-color: #009da3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.top-linne-icon {
+    max-height: 380px;
+}
+
+.top-welcome-message {
+    font-size: 64px;
+    font-weight: 700;
+    text-overflow: unset;
+    color: rgb(231, 233, 234);
+    line-height: 84px;
+    letter-spacing: -1.2px;
+    text-align: left;
+}
+
+.top-solicitation-message {
+    text-overflow: unset;
+    color: rgb(231, 233, 234);
+    margin-bottom: 32px;
+    line-height: 36px;
+    word-wrap: break-word;
+    font-weight: 700;
+    font-size: 31px;
+    text-align: inherit;
+}
+
+.top-participation-button {
+    display: flex;
+    flex-direction: column;
+}
+
+.top-login-button,
+.top-register-button {
+    border-color: rgba(0, 0, 0, 0);
+    background-color: #ffa500;
+    max-width: 380px;
+    margin-bottom: 8px;
+    height: 40px;
+    min-height: 36px;
+    min-width: 36px;
+    transition-duration: 0.2s;
+    user-select: none;
+    transition-property: background-color, box-shadow;
+    outline-style: none;
+    cursor: pointer;
+    padding-left: 16px;
+    padding-right: 16px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.top-login-button span,
+.top-register-button span {
+    text-overflow: unset;
+    color: rgb(255, 255, 255);
+    line-height: 20px;
+    word-wrap: break-word;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.top-attention-message {
+    text-overflow: unset;
+    color: rgb(255, 255, 255);
+    max-width: 380px;
+    word-wrap: break-word;
+    line-height: 12px;
+    text-align: inherit;
+    font-size: 11px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.top-attention-message a {
+    color: #ffa500;
+    text-decoration: none;
+}
