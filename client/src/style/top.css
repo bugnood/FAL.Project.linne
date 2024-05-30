@@ -1,59 +1,66 @@
 /*** content ***/
 .top-container {
     min-height: 100vh;
-    /* background-color: #20c4cc; */
     background-color: #009da3;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
+    /* 画面サイズに応じて子要素が折り返されるようにする */
+    padding: 20px;
+    /* 余白を追加 */
 }
 
 .top-linne-icon {
     max-height: 380px;
+    width: 100%;
+    max-width: 380px;
+    /* 最大幅を設定して画像が大きくなりすぎないようにする */
+    margin-bottom: 20px;
+    /* 画像下に余白を追加 */
 }
 
 .top-welcome-message {
-    font-size: 64px;
+    font-size: 48px;
+    /* デフォルトサイズを小さくする */
     font-weight: 700;
-    text-overflow: unset;
     color: rgb(231, 233, 234);
-    line-height: 84px;
-    letter-spacing: -1.2px;
+    line-height: 1.2;
     text-align: left;
+    margin-bottom: 16px;
+    /* 下に余白を追加 */
 }
 
 .top-solicitation-message {
-    text-overflow: unset;
     color: rgb(231, 233, 234);
     margin-bottom: 32px;
-    line-height: 36px;
-    word-wrap: break-word;
+    line-height: 1.2;
     font-weight: 700;
-    font-size: 31px;
+    font-size: 24px;
+    /* デフォルトサイズを小さくする */
     text-align: inherit;
 }
 
 .top-participation-button {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    /* 中央揃え */
+    width: 100%;
 }
 
 .top-login-button,
 .top-register-button {
-    border-color: rgba(0, 0, 0, 0);
+    border: none;
     background-color: #ffa500;
+    width: 100%;
     max-width: 380px;
+    /* 最大幅を設定 */
     margin-bottom: 8px;
     height: 40px;
-    min-height: 36px;
-    min-width: 36px;
-    transition-duration: 0.2s;
-    user-select: none;
-    transition-property: background-color, box-shadow;
-    outline-style: none;
+    transition: background-color 0.2s, box-shadow 0.2s;
     cursor: pointer;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding: 0 16px;
     box-sizing: border-box;
     border-radius: 20px;
     display: flex;
@@ -64,21 +71,18 @@
 
 .top-login-button span,
 .top-register-button span {
-    text-overflow: unset;
     color: rgb(255, 255, 255);
-    line-height: 20px;
-    word-wrap: break-word;
     font-weight: 700;
     font-size: 15px;
 }
 
 .top-attention-message {
-    text-overflow: unset;
     color: rgb(255, 255, 255);
     max-width: 380px;
     word-wrap: break-word;
-    line-height: 12px;
-    text-align: inherit;
+    line-height: 1.2;
+    text-align: center;
+    /* 中央揃え */
     font-size: 11px;
     font-weight: 400;
     margin-bottom: 20px;
@@ -87,4 +91,44 @@
 .top-attention-message a {
     color: #ffa500;
     text-decoration: none;
+}
+
+@media (min-width: 768px) {
+    .top-welcome-message {
+        font-size: 64px;
+        /* 大きな画面では元のサイズに戻す */
+        line-height: 84px;
+    }
+
+    .top-solicitation-message {
+        font-size: 31px;
+        /* 大きな画面では元のサイズに戻す */
+    }
+
+    .top-container {
+        flex-direction: row;
+        /* 横並びにする */
+        padding: 40px;
+        /* 余白を増やす */
+    }
+
+    .top-container-left-area,
+    .top-container-right-area {
+        flex: 1;
+        /* 各エリアが均等に幅を取る */
+        max-width: none;
+        /* 最大幅を解除 */
+        margin-bottom: 0;
+        /* 余白を削除 */
+    }
+
+    .top-container-right-area {
+        padding-left: 20px;
+        /* 左側に余白を追加 */
+    }
+
+    .top-participation-button {
+        align-items: flex-start;
+        /* 左揃えに戻す */
+    }
 }

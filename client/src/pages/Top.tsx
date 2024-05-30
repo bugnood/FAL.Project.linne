@@ -8,13 +8,10 @@ import '../style/top.css';
 ReactModal.setAppElement('#root');
 
 const Top: React.FC = () => {
-
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     return (
         <div className='top-container'>
-
-            {/* <button onClick={() => setModalIsOpen(true)}>モーダルを開く</button> */}
             <ReactModal
                 isOpen={modalIsOpen}
                 onRequestClose={() => setModalIsOpen(false)}
