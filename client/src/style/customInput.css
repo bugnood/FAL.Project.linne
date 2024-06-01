@@ -1,6 +1,6 @@
 /* src/style/customInput.css */
 .input-container {
-    margin: 10px 0;
+    margin: 20px 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -35,6 +35,13 @@
 
 .custom-input::placeholder {
     color: rgb(51 54 57 / 21%);
+}
+
+/* フォーカス時のスタイル */
+.custom-input:focus {
+    border-color: #009da3;
+    border: 1px solid #009da3;
+    /* box-shadow: 0 0 5px rgba(0, 157, 163, 0.5); */
 }
 
 .dob-selectors {

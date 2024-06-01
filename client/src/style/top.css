@@ -142,10 +142,12 @@
     align-items: center;
     justify-content: center;
     color: #009da3;
+    transition-duration: 0.2s;
 }
 
 .close-button:hover {
-    color: red;
+    color: #009ea38f;
+    transition-duration: 0.2s;
     /* ホバー時の色変更 */
 }
 

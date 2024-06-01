@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+// src/components/Top.tsx
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import appLogo from '../assets/linne.svg';
 import ReactModal from 'react-modal';
@@ -14,12 +15,16 @@ const Top: React.FC = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [usePhoneNumber, setUsePhoneNumber] = useState(true);
+    const usernameRef = useRef<HTMLInputElement>(null); // ユーザー名の入力フォームの参照を作成
 
     const openModal = () => {
         setIsLoading(true);
         setModalIsOpen(true);
         const timer = setTimeout(() => {
             setIsLoading(false);
+            if (usernameRef.current) {
+                usernameRef.current.focus(); // モーダルが開いたらユーザー名の入力フォームにフォーカス
+            }
         }, 1000);
 
         return () => clearTimeout(timer);
@@ -54,7 +59,7 @@ const Top: React.FC = () => {
                             </div>
                             <h1 className='top-modal-guidance'>アカウントを作成</h1>
                             <form className="top-form">
-                                <CustomInput label="ユーザーネーム" type="text" placeholder="ユーザーネームを入力" />
+                                <CustomInput ref={usernameRef} label="ユーザーネーム" type="text" placeholder="ユーザーネームを入力" />
                                 {usePhoneNumber ? (
                                     <CustomInput label="電話番号" type="tel" placeholder="電話番号を入力" />
                                 ) : (
