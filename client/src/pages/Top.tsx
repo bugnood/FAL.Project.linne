@@ -4,6 +4,7 @@ import appLogo from '../assets/linne.svg';
 import ReactModal from 'react-modal';
 import LoadingSpinner from '../components/LoadingSpinner'; // インポート
 import CustomInput from '../components/CustomInput';
+import DateOfBirthInput from '../components/DateOfBirthInput';
 import { FaTimes } from 'react-icons/fa';
 import '../style/top.css';
 
@@ -65,6 +66,7 @@ const Top: React.FC = () => {
                                 <div className='top-date-form'>
                                     <p className='top-date-form-title'>生年月日</p>
                                     <p className='top-date-form-note'>この情報は公開されません。このアカウントをビジネス、ペットなどに使う場合でも、ご自身の年齢を確認してください。</p>
+                                    <DateOfBirthInput />
                                 </div>
                                 <a className='top-next-button'>新規登録</a>
                             </form>

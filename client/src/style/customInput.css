@@ -19,13 +19,43 @@
     border: 1px solid rgb(51 54 57 / 21%);
     border-radius: 5px;
     font-size: 16px;
-    /* color: #009da3; */
     background-color: rgb(231, 233, 234);
     outline: none;
     box-sizing: border-box;
+    appearance: none;
+    /* デフォルトの矢印を非表示 */
+    -webkit-appearance: none;
+    /* Safariのデフォルト矢印を非表示 */
+    -moz-appearance: none;
+    /* Firefoxのデフォルト矢印を非表示 */
+    position: relative;
+    z-index: 1;
+    color: rgb(51 54 57 / 21%);
 }
 
 .custom-input::placeholder {
     color: rgb(51 54 57 / 21%);
-    /* プレースホルダーの色 */
+}
+
+.dob-selectors {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.selector-container {
+    position: relative;
+    flex: 1;
+}
+
+.selector-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    /* アイコンがクリックできないようにする */
+    z-index: 2;
+    color: rgb(51 54 57 / 21%);
 }
