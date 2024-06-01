@@ -30,7 +30,7 @@
     /* Firefoxのデフォルト矢印を非表示 */
     position: relative;
     z-index: 1;
-    color: rgb(51 54 57 / 21%);
+    /* color: rgb(51 54 57 / 21%); */
 }
 
 .custom-input::placeholder {
