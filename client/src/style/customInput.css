@@ -1,0 +1,31 @@
+/* src/style/customInput.css */
+.input-container {
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.input-label {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #fff;
+}
+
+.custom-input {
+    width: 100%;
+    height: 56px;
+    padding: 10px;
+    border: 1px solid rgb(51 54 57 / 21%);
+    border-radius: 5px;
+    font-size: 16px;
+    /* color: #009da3; */
+    background-color: rgb(231, 233, 234);
+    outline: none;
+    box-sizing: border-box;
+}
+
+.custom-input::placeholder {
+    color: rgb(51 54 57 / 21%);
+    /* プレースホルダーの色 */
+}

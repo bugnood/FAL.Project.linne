@@ -1,24 +1,76 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import appLogo from '../assets/linne.svg';
 import ReactModal from 'react-modal';
+import LoadingSpinner from '../components/LoadingSpinner'; // インポート
+import CustomInput from '../components/CustomInput';
+import { FaTimes } from 'react-icons/fa';
 import '../style/top.css';
 
-// アクセシビリティのためにルート要素を設定します
 ReactModal.setAppElement('#root');
 
 const Top: React.FC = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [usePhoneNumber, setUsePhoneNumber] = useState(true);
+
+    const openModal = () => {
+        setIsLoading(true);
+        setModalIsOpen(true);
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 1000);
+
+        return () => clearTimeout(timer);
+    };
+
+    const closeModal = () => {
+        setIsLoading(false);
+        setModalIsOpen(false);
+    };
+
+    const toggleInputMethod = () => {
+        setUsePhoneNumber(!usePhoneNumber);
+    };
 
     return (
         <div className='top-container'>
             <ReactModal
                 isOpen={modalIsOpen}
-                onRequestClose={() => setModalIsOpen(false)}
+                onRequestClose={closeModal}
+                shouldCloseOnOverlayClick={false}
                 contentLabel="Example Modal"
+                className={"top-register-modal"}
+                overlayClassName="custom-overlay"
             >
-                <h2>モーダルの内容</h2>
-                <button onClick={() => setModalIsOpen(false)}>閉じる</button>
+                <div className='top-modal-content'>
+                    {isLoading ? (
+                        <LoadingSpinner /> // 読み込み中はスピナーを表示
+                    ) : (
+                        <>
+                            <div className='top-modal-topArea'>
+                                <button className='close-button' onClick={closeModal}><FaTimes /></button>
+                            </div>
+                            <h1 className='top-modal-guidance'>アカウントを作成</h1>
+                            <form className="top-form">
+                                <CustomInput label="ユーザーネーム" type="text" placeholder="ユーザーネームを入力" />
+                                {usePhoneNumber ? (
+                                    <CustomInput label="電話番号" type="tel" placeholder="電話番号を入力" />
+                                ) : (
+                                    <CustomInput label="メールアドレス" type="email" placeholder="メールアドレスを入力" />
+                                )}
+                                <a className='top-phone-email-change-link' onClick={toggleInputMethod}>
+                                    {usePhoneNumber ? 'かわりにメールアドレスを登録する' : 'かわりに電話番号を登録する'}
+                                </a>
+                                <div className='top-date-form'>
+                                    <p className='top-date-form-title'>生年月日</p>
+                                    <p className='top-date-form-note'>この情報は公開されません。このアカウントをビジネス、ペットなどに使う場合でも、ご自身の年齢を確認してください。</p>
+                                </div>
+                                <a className='top-next-button'>新規登録</a>
+                            </form>
+                        </>
+                    )}
+                </div>
             </ReactModal>
 
             <div className='top-container-left-area'>
@@ -30,7 +82,7 @@ const Top: React.FC = () => {
                     <p className='top-solicitation-message'>さあ、みんなと日常を共有だ。</p>
                     <div className='top-participation-button'>
                         <Link to="/login" className='top-login-button'><span>ログイン</span></Link>
-                        <a className='top-register-button' onClick={() => setModalIsOpen(true)}><span>新規登録</span></a>
+                        <a className='top-register-button' onClick={openModal}><span>新規登録</span></a>
                     </div>
                     <p className='top-attention-message'>アカウントを登録することにより、<Link to="">利用規約</Link>と<Link to="">プライバシーポリシー（Cookieの使用を含む）</Link>に同意したとみなされます。</p>
                 </div>
