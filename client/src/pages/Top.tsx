@@ -1,38 +1,69 @@
 // src/components/Top.tsx
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import appLogo from '../assets/linne.svg';
 import ReactModal from 'react-modal';
-import LoadingSpinner from '../components/LoadingSpinner'; // インポート
+import LoadingSpinner from '../components/LoadingSpinner';
 import CustomInput from '../components/CustomInput';
 import DateOfBirthInput from '../components/DateOfBirthInput';
 import { FaTimes } from 'react-icons/fa';
 import '../style/top.css';
+import { useLogin } from '../hooks/useLogin';
+import FormField from '../components/FormField';
 
 ReactModal.setAppElement('#root');
 
 const Top: React.FC = () => {
-    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [registerModalIsOpen, setRegisterModalIsOpen] = useState(false);
+    const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [usePhoneNumber, setUsePhoneNumber] = useState(true);
-    const usernameRef = useRef<HTMLInputElement>(null); // ユーザー名の入力フォームの参照を作成
+    const registerUsernameRef = useRef<HTMLInputElement>(null);
+    const loginUsernameRef = useRef<HTMLInputElement>(null);
 
-    const openModal = () => {
+    const {
+        username,
+        setUsername,
+        password,
+        setPassword,
+        message,
+        handleLogin
+    } = useLogin();
+
+    const openRegisterModal = () => {
         setIsLoading(true);
-        setModalIsOpen(true);
+        setRegisterModalIsOpen(true);
         const timer = setTimeout(() => {
             setIsLoading(false);
-            if (usernameRef.current) {
-                usernameRef.current.focus(); // モーダルが開いたらユーザー名の入力フォームにフォーカス
+            if (registerUsernameRef.current) {
+                registerUsernameRef.current.focus();
             }
         }, 1000);
 
         return () => clearTimeout(timer);
     };
 
-    const closeModal = () => {
+    const closeRegisterModal = () => {
         setIsLoading(false);
-        setModalIsOpen(false);
+        setRegisterModalIsOpen(false);
+    };
+
+    const openLoginModal = () => {
+        setIsLoading(true);
+        setLoginModalIsOpen(true);
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+            if (loginUsernameRef.current) {
+                loginUsernameRef.current.focus();
+            }
+        }, 1000);
+
+        return () => clearTimeout(timer);
+    };
+
+    const closeLoginModal = () => {
+        setIsLoading(false);
+        setLoginModalIsOpen(false);
     };
 
     const toggleInputMethod = () => {
@@ -42,24 +73,24 @@ const Top: React.FC = () => {
     return (
         <div className='top-container'>
             <ReactModal
-                isOpen={modalIsOpen}
-                onRequestClose={closeModal}
+                isOpen={registerModalIsOpen}
+                onRequestClose={closeRegisterModal}
                 shouldCloseOnOverlayClick={false}
-                contentLabel="Example Modal"
+                contentLabel="Register Modal"
                 className={"top-register-modal"}
                 overlayClassName="custom-overlay"
             >
                 <div className='top-modal-content'>
                     {isLoading ? (
-                        <LoadingSpinner /> // 読み込み中はスピナーを表示
+                        <LoadingSpinner />
                     ) : (
                         <>
                             <div className='top-modal-topArea'>
-                                <button className='close-button' onClick={closeModal}><FaTimes /></button>
+                                <button className='close-button' onClick={closeRegisterModal}><FaTimes /></button>
                             </div>
                             <h1 className='top-modal-guidance'>アカウントを作成</h1>
                             <form className="top-form">
-                                <CustomInput ref={usernameRef} label="ユーザーネーム" type="text" placeholder="ユーザーネームを入力" />
+                                <CustomInput ref={registerUsernameRef} label="ユーザーネーム" type="text" placeholder="ユーザーネームを入力" />
                                 {usePhoneNumber ? (
                                     <CustomInput label="電話番号" type="tel" placeholder="電話番号を入力" />
                                 ) : (
@@ -80,6 +111,49 @@ const Top: React.FC = () => {
                 </div>
             </ReactModal>
 
+            <ReactModal
+                isOpen={loginModalIsOpen}
+                onRequestClose={closeLoginModal}
+                shouldCloseOnOverlayClick={false}
+                contentLabel="Login Modal"
+                className={"top-login-modal"}
+                overlayClassName="custom-overlay"
+            >
+                <div className='top-modal-content'>
+                    {isLoading ? (
+                        <LoadingSpinner />
+                    ) : (
+                        <>
+                            <div className='top-modal-topArea'>
+                                <button className='close-button' onClick={closeLoginModal}><FaTimes /></button>
+                            </div>
+                            <h1 className='top-modal-guidance'>ログイン</h1>
+                            <form className="top-form" onSubmit={handleLogin}>
+                                {/* <CustomInput ref={loginUsernameRef} label="ユーザーネーム" type="text" placeholder="ユーザーネームを入力" />
+                                <CustomInput label="パスワード" type="password" placeholder="パスワードを入力" /> */}
+                                <FormField
+                                    id="username"
+                                    label="ユーザー名 または メールアドレス"
+                                    type="text"
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                    className="input-field"
+                                />
+                                <FormField
+                                    id="password"
+                                    label="パスワード"
+                                    type="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    className="input-field"
+                                />
+                                <button type="submit" className='top-next-button'>ログイン</button>
+                            </form>
+                        </>
+                    )}
+                </div>
+            </ReactModal>
+
             <div className='top-container-left-area'>
                 <img src={appLogo} alt='linne' className='top-linne-icon' />
             </div>
@@ -88,8 +162,8 @@ const Top: React.FC = () => {
                     <h2 className='top-welcome-message'>linneで日常を<br />メッセージしよう！</h2>
                     <p className='top-solicitation-message'>さあ、みんなと日常を共有だ。</p>
                     <div className='top-participation-button'>
-                        <Link to="/login" className='top-login-button'><span>ログイン</span></Link>
-                        <a className='top-register-button' onClick={openModal}><span>新規登録</span></a>
+                        <a className='top-login-button' onClick={openLoginModal}><span>ログイン</span></a>
+                        <a className='top-register-button' onClick={openRegisterModal}><span>新規登録</span></a>
                     </div>
                     <p className='top-attention-message'>アカウントを登録することにより、<Link to="">利用規約</Link>と<Link to="">プライバシーポリシー（Cookieの使用を含む）</Link>に同意したとみなされます。</p>
                 </div>

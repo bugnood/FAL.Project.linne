@@ -82,7 +82,8 @@
     text-decoration: none;
 }
 
-.top-register-modal {
+.top-register-modal,
+.top-login-modal {
     height: 650px;
     max-height: 90vh;
     min-height: 400px;
