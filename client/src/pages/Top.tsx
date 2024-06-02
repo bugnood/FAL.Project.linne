@@ -8,8 +8,10 @@ import CustomInput from '../components/CustomInput';
 import DateOfBirthInput from '../components/DateOfBirthInput';
 import { FaTimes } from 'react-icons/fa';
 import '../style/top.css';
-import { useLogin } from '../hooks/useLogin';
+// import { useLogin } from '../hooks/useLogin';
 import FormField from '../components/FormField';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 // アプリケーションのルート要素を設定
 ReactModal.setAppElement('#root');
@@ -30,14 +32,36 @@ const Top: React.FC = () => {
     const loginUsernameRef = useRef<HTMLInputElement>(null);
 
     // ログインのカスタムフックから状態および関数を取得
-    const {
-        username,
-        setUsername,
-        password,
-        setPassword,
-        message,
-        handleLogin
-    } = useLogin();
+    // const {
+    //     username,
+    //     setUsername,
+    //     password,
+    //     setPassword,
+    //     message,
+    //     handleLogin
+    // } = useLogin();
+
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
+    const navigate = useNavigate();
+
+    const handleLogin = async (event: React.FormEvent) => {
+        event.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:5002/api/auth/login', { username, password });
+            setMessage(response.data.message);
+            if (response != null) {
+                navigate('/home');
+            }
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                setMessage(error.response?.data.message || 'An error occurred');
+            } else {
+                setMessage('An error occurred');
+            }
+        }
+    };
 
     // 登録モーダルを開く関数
     const openRegisterModal = () => {
