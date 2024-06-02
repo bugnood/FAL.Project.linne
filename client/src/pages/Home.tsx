@@ -80,11 +80,11 @@ const Home: React.FC = () => {
               <p className='post-content'>{post.content}</p>
               <div className='reaction-button'>
                 <button onClick={() => handleLike(index)} className="like-button">
-                  <FaHeart color="red" />
+                  <FaHeart color="#ddd" />
                   <span>{post.likes_count}</span>
                 </button>
                 <button onClick={() => handleFavorite(index)} className="favorite-button">
-                  <FaStar color="yellow" />
+                  <FaStar color="#ddd" />
                   <span>{post.favorite_count}</span>
                 </button>
               </div>
