@@ -1,23 +1,66 @@
 /* client/src/style/createPost.css */
 
 .create-post-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  h2 {
+  /* max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-color: #ddd;
+  margin: 20px auto;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  box-sizing: border-box;
+  font-size: 14px;
+  height: 400px;
+  padding: 20px;
+}
+
+.create-post-text-field {
+  box-sizing: border-box;
+  border: none;
+  height: 200px;
+  outline: none;
+  resize: none;
+}
+
+.create-post-button {
+  background-color: #009da3;
+  border-color: rgba(0, 0, 0, 0);
+  transition-duration: 0.2s;
+  -webkit-user-select: none;
+  user-select: none;
+  /* opacity: 0.5; */
+  outline-style: none;
+  text-overflow: unset;
+  color: white;
+  line-height: 20px;
+  word-wrap: break-word;
+  text-align: center;
+  font-weight: 700;
+  font-size: 15px;
+  min-height: 45px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* h2 {
     color: #333;
     margin-bottom: 20px;
     font-family: 'Arial', sans-serif;
     font-size: 24px;
-  }
-  
-  .input-field {
+  } */
+
+/* .input-field {
     width: calc(100% - 20px);
     padding: 10px;
     margin: 10px auto;
@@ -26,15 +69,15 @@
     box-sizing: border-box;
     font-family: 'Arial', sans-serif;
     font-size: 16px;
-  }
-  
-  .input-field:focus {
+  } */
+
+/* .input-field:focus {
     border-color: #80bdff;
     outline: none;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
-  }
-  
-  .post-button {
+  } */
+
+/* .post-button {
     width: calc(100% - 20px);
     padding: 10px;
     margin-top: 20px;
@@ -45,14 +88,14 @@
     cursor: pointer;
     font-family: 'Arial', sans-serif;
     font-size: 18px;
-  }
-  
-  .post-button:hover {
+  } */
+
+/* .post-button:hover {
     background-color: #0056b3;
-  }
-  
-  /* レスポンシブ対応 */
-  @media (max-width: 600px) {
+  } */
+
+/* レスポンシブ対応 */
+/* @media (max-width: 600px) {
     .create-post-container {
       padding: 10px;
     }
@@ -66,5 +109,4 @@
       padding: 8px;
       font-size: 16px;
     }
-  }
-  
+  } */

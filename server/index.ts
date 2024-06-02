@@ -39,7 +39,7 @@ app.use(cors());
 app.get('/api/posts', async (req: Request, res: Response) => {
   try {
     const connection = await mysql.createConnection(dbConfig);
-    const [rows] = await connection.execute('SELECT * FROM posts');
+    const [rows] = await connection.execute('SELECT * FROM posts ORDER BY created_at DESC');
     await connection.end();
     res.json(rows);
   } catch (error) {

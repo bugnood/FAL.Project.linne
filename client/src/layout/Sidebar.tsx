@@ -10,8 +10,8 @@ const Sidebar: React.FC = () => {
         <div className='sidebar-list-group'>
           <Link to="/home">タイムライン</Link>
           <Link to="/create-post">新規投稿</Link>
-          <Link to="/register">新規登録</Link>
-          <Link to="/">ログイン画面</Link>
+          {/* <Link to="/register">新規登録</Link> */}
+          {/* <Link to="/">ログイン画面</Link> */}
         </div>
       </div>
       {/* <nav>
