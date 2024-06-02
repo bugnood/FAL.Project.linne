@@ -11,16 +11,25 @@ import '../style/top.css';
 import { useLogin } from '../hooks/useLogin';
 import FormField from '../components/FormField';
 
+// アプリケーションのルート要素を設定
 ReactModal.setAppElement('#root');
 
 const Top: React.FC = () => {
+    // ログインおよび登録モーダルの状態を管理
     const [registerModalIsOpen, setRegisterModalIsOpen] = useState(false);
     const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
+
+    // ローディング状態を管理
     const [isLoading, setIsLoading] = useState(false);
+
+    // 電話番号を使用するかどうかの状態を管理
     const [usePhoneNumber, setUsePhoneNumber] = useState(true);
+
+    // フォームの参照を作成
     const registerUsernameRef = useRef<HTMLInputElement>(null);
     const loginUsernameRef = useRef<HTMLInputElement>(null);
 
+    // ログインのカスタムフックから状態および関数を取得
     const {
         username,
         setUsername,
@@ -30,6 +39,7 @@ const Top: React.FC = () => {
         handleLogin
     } = useLogin();
 
+    // 登録モーダルを開く関数
     const openRegisterModal = () => {
         setIsLoading(true);
         setRegisterModalIsOpen(true);
@@ -43,11 +53,13 @@ const Top: React.FC = () => {
         return () => clearTimeout(timer);
     };
 
+    // 登録モーダルを閉じる関数
     const closeRegisterModal = () => {
         setIsLoading(false);
         setRegisterModalIsOpen(false);
     };
 
+    // ログインモーダルを開く関数
     const openLoginModal = () => {
         setIsLoading(true);
         setLoginModalIsOpen(true);
@@ -61,17 +73,20 @@ const Top: React.FC = () => {
         return () => clearTimeout(timer);
     };
 
+    // ログインモーダルを閉じる関数
     const closeLoginModal = () => {
         setIsLoading(false);
         setLoginModalIsOpen(false);
     };
 
+    // 入力方法を切り替える関数
     const toggleInputMethod = () => {
         setUsePhoneNumber(!usePhoneNumber);
     };
 
     return (
         <div className='top-container'>
+            {/* 登録モーダル */}
             <ReactModal
                 isOpen={registerModalIsOpen}
                 onRequestClose={closeRegisterModal}
@@ -111,6 +126,7 @@ const Top: React.FC = () => {
                 </div>
             </ReactModal>
 
+            {/* ログインモーダル */}
             <ReactModal
                 isOpen={loginModalIsOpen}
                 onRequestClose={closeLoginModal}
@@ -129,8 +145,6 @@ const Top: React.FC = () => {
                             </div>
                             <h1 className='top-modal-guidance'>ログイン</h1>
                             <form className="top-form" onSubmit={handleLogin}>
-                                {/* <CustomInput ref={loginUsernameRef} label="ユーザーネーム" type="text" placeholder="ユーザーネームを入力" />
-                                <CustomInput label="パスワード" type="password" placeholder="パスワードを入力" /> */}
                                 <FormField
                                     id="username"
                                     label="ユーザー名 または メールアドレス"
@@ -154,6 +168,7 @@ const Top: React.FC = () => {
                 </div>
             </ReactModal>
 
+            {/* レイアウト */}
             <div className='top-container-left-area'>
                 <img src={appLogo} alt='linne' className='top-linne-icon' />
             </div>
@@ -162,9 +177,12 @@ const Top: React.FC = () => {
                     <h2 className='top-welcome-message'>linneで日常を<br />メッセージしよう！</h2>
                     <p className='top-solicitation-message'>さあ、みんなと日常を共有だ。</p>
                     <div className='top-participation-button'>
+                        {/* ログインボタン */}
                         <a className='top-login-button' onClick={openLoginModal}><span>ログイン</span></a>
+                        {/* 新規登録ボタン */}
                         <a className='top-register-button' onClick={openRegisterModal}><span>新規登録</span></a>
                     </div>
+                    {/* 注意メッセージ */}
                     <p className='top-attention-message'>アカウントを登録することにより、<Link to="">利用規約</Link>と<Link to="">プライバシーポリシー（Cookieの使用を含む）</Link>に同意したとみなされます。</p>
                 </div>
             </div>
