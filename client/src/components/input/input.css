@@ -1,0 +1,22 @@
+.custom-input {
+    height: 40px;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 15px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline: none;
+    transition-duration: 0.2s;
+}
+
+.custom-input::placeholder {
+    color: rgb(51 54 57 / 21%);
+}
+
+.custom-input:focus {
+    border-color: #009da3;
+    border: 2px solid #009da3;
+    transition-duration: 0.2s;
+}

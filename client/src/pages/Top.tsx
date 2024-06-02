@@ -13,6 +13,8 @@ import FormField from '../components/FormField';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+import Input from '../components/input/input';
+
 // アプリケーションのルート要素を設定
 ReactModal.setAppElement('#root');
 
@@ -169,22 +171,24 @@ const Top: React.FC = () => {
                             </div>
                             <h1 className='top-modal-guidance'>ログイン</h1>
                             <form className="top-form" onSubmit={handleLogin}>
-                                <FormField
+                                <Input type="text" placeholder="ユーザー名" value={username} onChange={(e) => setUsername(e.target.value)} />
+                                <Input type="password" placeholder="パスワード" value={password} onChange={(e) => setPassword(e.target.value)} />
+                                {/* <FormField
                                     id="username"
                                     label="ユーザー名 または メールアドレス"
                                     type="text"
                                     value={username}
                                     onChange={(e) => setUsername(e.target.value)}
                                     className="input-field"
-                                />
-                                <FormField
+                                /> */}
+                                {/* <FormField
                                     id="password"
                                     label="パスワード"
                                     type="password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     className="input-field"
-                                />
+                                /> */}
                                 <button type="submit" className='top-next-button'>ログイン</button>
                             </form>
                         </>
