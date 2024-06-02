@@ -15,14 +15,39 @@ body {
 header {
   height: 50px;
   color: white;
-  background-color: #3acdce;
+  background-color: #009da3;
+  display: flex;
+  align-items: center;
+}
+
+.header-logo-content {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.header-logo-content img {
+  height: 30px;
+}
+
+.header-logo {
+  font-size: 30px;
+  padding-left: 5px;
+  color: rgb(231, 233, 234);
 }
 
 /*** footer ***/
 footer {
   height: 50px;
-  color: white;
-  background-color: #3acdce;
+  color: rgb(231, 233, 234);
+  background-color: #009da3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+footer p {
+  padding-right: 10px;
 }
 
 /*** content ***/
