@@ -13,7 +13,7 @@ import FormField from '../components/FormField';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-import Input from '../components/input/input';
+// import Input from '../components/input/Input';
 
 // アプリケーションのルート要素を設定
 ReactModal.setAppElement('#root');
@@ -170,10 +170,10 @@ const Top: React.FC = () => {
                                 <button className='close-button' onClick={closeLoginModal}><FaTimes /></button>
                             </div>
                             <h1 className='top-modal-guidance'>ログイン</h1>
-                            <form className="top-form" onSubmit={handleLogin}>
+                            {/* <form className="top-form" onSubmit={handleLogin}>
                                 <Input type="text" placeholder="ユーザー名" value={username} onChange={(e) => setUsername(e.target.value)} />
-                                <Input type="password" placeholder="パスワード" value={password} onChange={(e) => setPassword(e.target.value)} />
-                                {/* <FormField
+                                <Input type="password" placeholder="パスワード" value={password} onChange={(e) => setPassword(e.target.value)} /> */}
+                            {/* <FormField
                                     id="username"
                                     label="ユーザー名 または メールアドレス"
                                     type="text"
@@ -181,7 +181,7 @@ const Top: React.FC = () => {
                                     onChange={(e) => setUsername(e.target.value)}
                                     className="input-field"
                                 /> */}
-                                {/* <FormField
+                            {/* <FormField
                                     id="password"
                                     label="パスワード"
                                     type="password"
@@ -189,8 +189,9 @@ const Top: React.FC = () => {
                                     onChange={(e) => setPassword(e.target.value)}
                                     className="input-field"
                                 /> */}
-                                <button type="submit" className='top-next-button'>ログイン</button>
-                            </form>
+                            {/* <button type="submit" className='top-next-button'>ログイン</button>
+                            </form> */}
+                            <Link to={'/login'}></Link>
                         </>
                     )}
                 </div>
@@ -206,6 +207,7 @@ const Top: React.FC = () => {
                     <p className='top-solicitation-message'>さあ、みんなと日常を共有だ。</p>
                     <div className='top-participation-button'>
                         {/* ログインボタン */}
+                        <Link to={'/login'}>aaa</Link>
                         <a className='top-login-button' onClick={openLoginModal}><span>ログイン</span></a>
                         {/* 新規登録ボタン */}
                         <a className='top-register-button' onClick={openRegisterModal}><span>新規登録</span></a>

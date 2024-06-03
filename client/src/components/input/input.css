@@ -4,7 +4,7 @@
     margin-bottom: 15px;
     padding: 10px;
     font-size: 15px;
-    border: 2px solid #ccc;
+    border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
     outline: none;
@@ -17,6 +17,6 @@
 
 .custom-input:focus {
     border-color: #009da3;
-    border: 2px solid #009da3;
+    border: 1px solid #009da3;
     transition-duration: 0.2s;
 }

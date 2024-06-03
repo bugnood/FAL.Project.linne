@@ -1,27 +1,17 @@
-.container {
+.login-container {
+  height: 100vh;
+  background-color: #009da3;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  margin: 0;
-  background-color: #f5f5f5;
 }
 
-.login-container {
-  width: 90%;
-  max-width: 400px;
-  margin: 20px;
-  padding: 40px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #fff;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.login-container img {
-  width: 120px;
-  margin-bottom: 20px;
+.login-box {
+  width: 450px;
+  border-radius: 5px;
+  background-color: #f8f7f6;
+  padding: 20px 40px;
+  box-sizing: border-box;
 }
 
 .login-form {
@@ -30,79 +20,44 @@
   align-items: center;
 }
 
-.form-group {
+.login-title {
+  text-overflow: unset;
+  color: #009da3;
+  line-height: 36px;
+  word-wrap: break-word;
   width: 100%;
-  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 31px;
+  text-align: inherit;
 }
 
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  text-align: left;
+.login-input-label {
+  text-overflow: unset;
+  color: #009da3;
+  margin-bottom: 8px;
+  line-height: 20px;
+  word-wrap: break-word;
+  min-width: 0px;
+  font-weight: 700;
+  font-size: 15px;
+  text-align: inherit;
+  width: 100%;
 }
 
-.input-field {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.login-input-annotation {
+  text-overflow: unset;
+  color: rgb(113, 118, 123);
+  margin-bottom: 4px;
+  word-wrap: break-word;
+  min-width: 0px;
+  text-align: inherit;
+  line-height: 16px;
   font-size: 14px;
+  font-weight: 400;
 }
 
-.login-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #3acdce;
-  border: none;
-  border-radius: 4px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.login-button:hover {
-  background-color: #6ce8e8;
-}
-
-.forgot-password {
-  margin-top: 20px;
-  color: #3acdce;
+.login-back-to-top {
   text-decoration: none;
-  font-size: 14px;
-}
-
-.forgot-password:hover {
-  text-decoration: underline;
-}
-
-.message {
-  margin-top: 10px;
-  color: red;
-  font-size: 14px;
-}
-
-/* Responsive Design */
-@media (min-width: 768px) {
-  .login-container {
-    width: 400px;
-  }
-}
-
-@media (max-width: 480px) {
-  .login-container {
-    padding: 20px;
-  }
-
-  .login-container h2 {
-    font-size: 14px;
-  }
-
-  .login-button {
-    font-size: 14px;
-  }
-
-  .forgot-password {
-    font-size: 12px;
-  }
+  color: #009da3;
+  margin-top: 20px;
 }
