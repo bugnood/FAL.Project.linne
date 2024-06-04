@@ -18,7 +18,7 @@ const Login: React.FC = () => {
             const response = await axios.post('http://localhost:5002/api/auth/login', { username, password });
             // setMessage(response.data.message);
             if (response != null) {
-                navigate('/home');
+                navigate('/timeline');
             }
         } catch (error) {
             if (axios.isAxiosError(error)) {

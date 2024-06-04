@@ -6,7 +6,7 @@ import dbConfig from '../config/dbConfig';
 export const getPosts = async (req: Request, res: Response) => {
     try {
         const connection = await mysql.createConnection(dbConfig);
-        const [rows] = await connection.execute('SELECT * FROM posts ORDER BY created_at DESC');
+        const [rows] = await connection.execute('SELECT * FROM pops ORDER BY created_at DESC');
         await connection.end();
         res.json(rows);
     } catch (error) {
@@ -81,14 +81,14 @@ export const likePost = async (req: Request, res: Response) => {
 
 // お気に入り数を更新する
 export const favoritePost = async (req: Request, res: Response) => {
-    const postId = req.params.id;
+    const post_no = req.params.id;
 
     try {
         const connection = await mysql.createConnection(dbConfig);
-        await connection.execute('UPDATE posts SET favorite_count = favorite_count + 1 WHERE post_id = ?', [postId]);
-        const [rows] = await connection.execute('SELECT favorite_count FROM posts WHERE post_id = ?', [postId]);
+        await connection.execute('UPDATE pops SET favorites_count = favorites_count + 1 WHERE post_no = ?', [post_no]);
+        const [rows] = await connection.execute('SELECT favorites_count FROM pops WHERE post_no = ?', [post_no]);
         await connection.end();
-        res.status(200).json({ favorite_count: (rows as any)[0].favorite_count });
+        res.status(200).json({ favorites_count: (rows as any)[0].favorites_count });
     } catch (error) {
         console.error(error);
         res.status(500).send({ message: 'Failed to update favorite count' });

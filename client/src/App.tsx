@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import CreatePost from './pages/CreatePost';
 import Register from './pages/Register';
 import Layout from '../src/layout/Layout';
+import Timeline from './pages/Timeline';
 
 const App: React.FC = () => {
   return (
@@ -14,7 +15,7 @@ const App: React.FC = () => {
         <Route path="/" element={<Top />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/home" element={<Layout><Home /></Layout>} />
+        <Route path="/timeline" element={<Layout><Timeline /></Layout>} />
         <Route path="/create-post" element={<Layout><CreatePost /></Layout>} />
       </Routes>
     </Router>

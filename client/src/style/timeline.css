@@ -1,0 +1,84 @@
+.timeline-container {
+    height: calc(100vh - 100px);
+    overflow-y: scroll;
+}
+
+.timeline-container::-webkit-scrollbar {
+    display: none;
+}
+
+.post-content-area {
+    display: flex;
+    align-items: flex-start;
+    border-color: #ddd;
+    margin: 20px auto;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.post-right-area {
+    padding: 10px;
+}
+
+.post-left-area {
+    padding: 10px;
+}
+
+.user-icon {
+    height: 40px;
+    width: 40px;
+    padding-top: 10px;
+    border-radius: 50%;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+}
+
+.user-name {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.user-id {
+    color: gray;
+    font-size: 0.9rem;
+}
+
+.post-content {
+    padding: 10px;
+}
+
+.reaction-button {
+    display: flex;
+}
+
+.like-button,
+.favorite-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 11px;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+}
+
+.like-button:hover,
+.favorite-button:hover {
+    opacity: 0.7;
+}
+
+/* ボタンのカウント表示 */
+.like-button span,
+.favorite-button span {
+    margin-left: 5px;
+    font-size: 13px;
+    color: #bababa;
+}
