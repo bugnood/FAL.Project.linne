@@ -30,22 +30,22 @@ const Timeline: React.FC = () => {
     };
 
     useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const response = await fetch('http://localhost:5002/api/posts');
-                if (!response.ok) {
-                    throw new Error('Failed to fetch posts');
-                }
-                const data = await response.json();
-                setPosts(data);
-            } catch (error) {
-                console.error(error);
-                setPosts([]);
-            }
-        };
-
         fetchPosts();
     }, []);
+
+    const fetchPosts = async () => {
+        try {
+            const response = await fetch('http://localhost:5002/api/posts');
+            if (!response.ok) {
+                throw new Error('Failed to fetch posts');
+            }
+            const data = await response.json();
+            setPosts(data);
+        } catch (error) {
+            console.error(error);
+            setPosts([]);
+        }
+    };
 
     const handleFavorite = async (index: number) => {
         const post_no = posts[index].post_no;
@@ -76,7 +76,9 @@ const Timeline: React.FC = () => {
             const response = await axios.post('http://localhost:5002/api/posts/', { newPopsContents });
             // setMessage(response.data.message);
             if (response != null) {
-                navigate('/timeline');
+                closePopsModal();
+                setNewPopsContents('');
+                fetchPosts();
             }
         } catch (error) {
             if (axios.isAxiosError(error)) {
@@ -122,7 +124,8 @@ const Timeline: React.FC = () => {
                     overlayClassName="custom-overlay"
                 >
                     <div className='timeline-modal-top-area'>
-                        <button className='timeline-modal-close-button' onClick={closePopsModal}><IoIosCloseCircle size={35} /></button>
+                        <button className='timeline-modal-top-area-button cancel-button' onClick={closePopsModal}>キャンセル</button>
+                        <button className='timeline-modal-top-area-button' onClick={handleNewCreatePops}>つぶやく</button>
                     </div>
                     <form onSubmit={handleNewCreatePops}>
                         <textarea

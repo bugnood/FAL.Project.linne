@@ -49,13 +49,14 @@ export const updatePost = async (req: Request, res: Response) => {
 // };
 
 export const createPost = async (req: Request, res: Response) => {
-    const { user_id, content, image1, image2, image3, image4, tags, favorites_count = 0, attention_count = 0, bookmarks_count = 0 } = req.body;
+    const { newPopsContents } = req.body;
+    console.log(newPopsContents);
 
     try {
         const connection = await mysql.createConnection(dbConfig);
         const [result] = await connection.execute(
             'INSERT INTO pops (user_id, content, image1, image2, image3, image4, tags, favorites_count, attention_count, bookmarks_count) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-            [user_id, content, image1, image2, image3, image4, tags, favorites_count, attention_count, bookmarks_count]
+            [1, newPopsContents, null, null, null, null, null, 0, 0, 0]
         );
         await connection.end();
         res.json({ message: 'Post created successfully', post_no: (result as any).insertId });

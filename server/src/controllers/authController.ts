@@ -38,7 +38,7 @@ export const register = async (req: Request, res: Response) => {
             [user_identification_code, username, password, created_at, updated_at]
         );
         await connection.end();
-        res.status(201).json({ message: 'User registered successfully', user_id: (result as any).insertId });
+        res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
         console.error('Database query error:', error);
         res.status(500).json({ message: 'Internal server error' });

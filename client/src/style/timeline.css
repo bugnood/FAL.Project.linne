@@ -102,7 +102,7 @@
 
 .timeline-new-pops-modal {
     height: 600px;
-    width: 500px;
+    width: 400px;
     background-color: rgb(231, 233, 234);
     border-radius: 5px;
     overflow-x: hidden;
@@ -116,25 +116,39 @@
 .timeline-modal-top-area {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
 }
 
-.timeline-modal-close-button {
-    height: 35px;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: transparent;
+.timeline-modal-top-area-button {
+    height: 30px;
+    width: 100px;
+    margin-top: 10px;
+    border-radius: 20px;
     border: none;
-    outline: none;
-    color: #009da3;
     cursor: pointer;
+    font-weight: 700;
+    background-color: #009da3;
+    color: white;
+    box-sizing: border-box;
+}
+
+.timeline-modal-top-area-button:hover {
+    opacity: 0.8;
+}
+
+.cancel-button {
+    background-color: white;
+    color: #009da3;
+    border: 2px solid #009da3;
 }
 
 .timeline-new-pops-contents {
     height: 300px;
     width: 100%;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.3rem;
-    padding: 10px;
+    padding: 25px 11px;
     background-color: transparent;
     border: none;
     box-sizing: border-box;
