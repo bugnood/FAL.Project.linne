@@ -207,10 +207,11 @@ const Top: React.FC = () => {
                     <p className='top-solicitation-message'>さあ、みんなと日常を共有だ。</p>
                     <div className='top-participation-button'>
                         {/* ログインボタン */}
-                        <Link to={'/login'}>aaa</Link>
-                        <a className='top-login-button' onClick={openLoginModal}><span>ログイン</span></a>
+                        <Link to={'/login'}>ログイン</Link>
+                        {/* <a className='top-login-button' onClick={openLoginModal}><span>ログイン</span></a> */}
                         {/* 新規登録ボタン */}
-                        <a className='top-register-button' onClick={openRegisterModal}><span>新規登録</span></a>
+                        <Link to={'/register'}>新規登録</Link>
+                        {/* <a className='top-register-button' onClick={openRegisterModal}><span>新規登録</span></a> */}
                     </div>
                     {/* 注意メッセージ */}
                     <p className='top-attention-message'>アカウントを登録することにより、<Link to="">利用規約</Link>と<Link to="">プライバシーポリシー（Cookieの使用を含む）</Link>に同意したとみなされます。</p>

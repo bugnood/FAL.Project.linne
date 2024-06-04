@@ -1,142 +1,55 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import Input from '../components/input/Input';
+import Button from '../components/button/Button';
 import '../style/register.css';
 
 const Register: React.FC = () => {
-  // フォームフィールドの状態を保持する状態変数
-  const [username, setUsername] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [fullName, setFullName] = useState<string>('');
-  const [bio, setBio] = useState<string>('');
-  const [location, setLocation] = useState<string>('');
-  const [website, setWebsite] = useState<string>('');
-  const [birthDate, setBirthDate] = useState<string>('');
-  const [message, setMessage] = useState<string>('');
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  // フォーム送信時の処理
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // デフォルトのフォーム送信動作を防止
-  
+  // ログイン処理
+  const handleregister = async (event: React.FormEvent) => {
+    event.preventDefault();
     try {
-      // サーバーにPOSTリクエストを送信
-      const response = await fetch('http://localhost:5002/api/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username,
-          email,
-          password,
-          full_name: fullName,
-          bio,
-          location,
-          website,
-          birth_date: birthDate,
-        }),
-      });
-  
-      // レスポンスのステータスコードが201の場合、登録成功とみなす
-      if (response.status === 201) {
-        setMessage('登録が成功しました。');
-        navigate('/home'); // ホームページにリダイレクト
+      const response = await axios.post('http://localhost:5002/api/auth/register', { username, password });
+      // setMessage(response.data.message);
+      if (response != null) {
+        navigate('/home');
       }
     } catch (error) {
-      // エラーハンドリング
-      setMessage('エラーが発生しました。担当者に連絡してください。');
+      if (axios.isAxiosError(error)) {
+        // setMessage(error.response?.data.message || 'An error occurred');
+      } else {
+        // setMessage('An error occurred');
+      }
     }
   };
-  
 
   return (
-    <div className="register-container">
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit} className="register-form">
-        {/* 各入力フィールド */}
-        <div className="form-group">
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className="input-field"
+    <div className='register-container'>
+      <div className='register-box'>
+        <form className='register-form' onSubmit={handleregister}>
+          <h2 className='register-title'>新規登録</h2>
+          <p className='register-input-label'>ユーザ名</p>
+          <p></p>
+          <Input type="text" placeholder="ユーザー名" value={username} onChange={(e) => setUsername(e.target.value)} />
+          <p className='register-input-label'>パスワード</p>
+          <p className='register-input-annotation'>パスワードは8文字以上で、大文字、小文字、数字、記号を含めて設定してください。</p>
+          <Input type="password" placeholder="パスワード" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <Button
+            label="新規登録"
+            style={{}}
+            className=""
+            icon={<i className="fas fa-check"></i>}
+            ariaLabel="Click Me Button"
           />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="input-field"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="input-field"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="full_name">Full Name:</label>
-          <input
-            type="text"
-            id="full_name"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            className="input-field"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="bio">Bio:</label>
-          <textarea
-            id="bio"
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
-            className="input-field"
-          ></textarea>
-        </div>
-        <div className="form-group">
-          <label htmlFor="location">Location:</label>
-          <input
-            type="text"
-            id="location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            className="input-field"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="website">Website:</label>
-          <input
-            type="text"
-            id="website"
-            value={website}
-            onChange={(e) => setWebsite(e.target.value)}
-            className="input-field"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="birth_date">Birth Date:</label>
-          <input
-            type="date"
-            id="birth_date"
-            value={birthDate}
-            onChange={(e) => setBirthDate(e.target.value)}
-            className="input-field"
-          />
-        </div>
-        <button type="submit" className="register-button">Register</button>
-      </form>
-      <p className="message">{message}</p>
+          <Link to={'/'} className='register-back-to-top'>TOP画面に戻る</Link>
+        </form>
+      </div>
     </div>
   );
 };

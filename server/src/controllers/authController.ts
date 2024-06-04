@@ -9,7 +9,7 @@ export const login = async (req: Request, res: Response) => {
     try {
         const connection = await mysql.createConnection(dbConfig);
         const [rows] = await connection.execute(
-            'SELECT * FROM users WHERE username = ? AND password = ?', [username, password]
+            'SELECT * FROM users WHERE user_name = ? AND password = ?', [username, password]
         );
         await connection.end();
 
@@ -26,14 +26,16 @@ export const login = async (req: Request, res: Response) => {
 
 // ユーザー登録処理
 export const register = async (req: Request, res: Response) => {
-    const { username, email, password, full_name, bio, location, website, birth_date } = req.body;
+    const { username, password } = req.body;
 
     try {
-        const joined_date = new Date();
+        const created_at = new Date();
+        const updated_at = new Date();
+        const user_identification_code = 'aaaaa';
         const connection = await mysql.createConnection(dbConfig);
         const [result] = await connection.execute(
-            'INSERT INTO users (username, email, password, full_name, bio, location, website, birth_date, joined_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-            [username, email, password, full_name, bio, location, website, birth_date, joined_date]
+            'INSERT INTO users (user_identification_code, user_name, password, created_at, updated_at) VALUES (?, ?, ?, ?, ?)',
+            [user_identification_code, username, password, created_at, updated_at]
         );
         await connection.end();
         res.status(201).json({ message: 'User registered successfully', user_id: (result as any).insertId });
