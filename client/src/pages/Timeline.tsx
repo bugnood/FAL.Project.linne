@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
 import { CiCirclePlus } from "react-icons/ci";
 import { IoIosCloseCircle } from "react-icons/io";
 import ReactModal from 'react-modal';
+import axios from 'axios';
 import '../style/timeline.css';
 import miraiSpectrumIcon from '../assets/mirai-spectrum_icon.png';
 
@@ -65,6 +67,26 @@ const Timeline: React.FC = () => {
         }
     };
 
+    const navigate = useNavigate();
+
+    // 新規投稿処理
+    const handleNewCreatePops = async (event: React.FormEvent) => {
+        event.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:5002/api/posts/', { newPopsContents });
+            // setMessage(response.data.message);
+            if (response != null) {
+                navigate('/timeline');
+            }
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                // setMessage(error.response?.data.message || 'An error occurred');
+            } else {
+                // setMessage('An error occurred');
+            }
+        }
+    };
+
     return (
         <div className="timeline-container">
             <div className="timeline-post">
@@ -102,12 +124,14 @@ const Timeline: React.FC = () => {
                     <div className='timeline-modal-top-area'>
                         <button className='timeline-modal-close-button' onClick={closePopsModal}><IoIosCloseCircle size={35} /></button>
                     </div>
-                    <textarea
-                        placeholder='今、何してる？'
-                        maxLength={140}
-                        value={newPopsContents}
-                        onChange={(e) => setNewPopsContents(e.target.value)}
-                        className="timeline-new-pops-contents" />
+                    <form onSubmit={handleNewCreatePops}>
+                        <textarea
+                            placeholder='今、何してる？'
+                            maxLength={140}
+                            value={newPopsContents}
+                            onChange={(e) => setNewPopsContents(e.target.value)}
+                            className="timeline-new-pops-contents" />
+                    </form>
                 </ReactModal>
             </div>
         </div>

@@ -31,17 +31,34 @@ export const updatePost = async (req: Request, res: Response) => {
 };
 
 // 新規投稿を作成する
+// export const createPost = async (req: Request, res: Response) => {
+//     const { user_id, content, media, hashtags, mentions } = req.body;
+
+//     try {
+//         const connection = await mysql.createConnection(dbConfig);
+//         const [result] = await connection.execute(
+//             'INSERT INTO posts (user_id, content, media, hashtags, mentions) VALUES (?, ?, ?, ?, ?)',
+//             [user_id, content, media, hashtags, mentions]
+//         );
+//         await connection.end();
+//         res.json({ message: 'Post created successfully', post_id: (result as any).insertId });
+//     } catch (error) {
+//         console.error('Database query error:', error);
+//         res.status(500).json({ message: 'Internal server error' });
+//     }
+// };
+
 export const createPost = async (req: Request, res: Response) => {
-    const { user_id, content, media, hashtags, mentions } = req.body;
+    const { user_id, content, image1, image2, image3, image4, tags, favorites_count = 0, attention_count = 0, bookmarks_count = 0 } = req.body;
 
     try {
         const connection = await mysql.createConnection(dbConfig);
         const [result] = await connection.execute(
-            'INSERT INTO posts (user_id, content, media, hashtags, mentions) VALUES (?, ?, ?, ?, ?)',
-            [user_id, content, media, hashtags, mentions]
+            'INSERT INTO pops (user_id, content, image1, image2, image3, image4, tags, favorites_count, attention_count, bookmarks_count) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [user_id, content, image1, image2, image3, image4, tags, favorites_count, attention_count, bookmarks_count]
         );
         await connection.end();
-        res.json({ message: 'Post created successfully', post_id: (result as any).insertId });
+        res.json({ message: 'Post created successfully', post_no: (result as any).insertId });
     } catch (error) {
         console.error('Database query error:', error);
         res.status(500).json({ message: 'Internal server error' });

@@ -11,7 +11,7 @@ const Register: React.FC = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  // ログイン処理
+  // 新規登録処理
   const handleregister = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
