@@ -82,3 +82,63 @@
     font-size: 13px;
     color: #bababa;
 }
+
+.timeline-new-pops-button {
+    height: 80px;
+    width: 80px;
+    padding: 0;
+    background-color: transparent;
+    border-color: transparent;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    right: 40px;
+    bottom: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timeline-new-pops-modal {
+    height: 600px;
+    width: 500px;
+    background-color: rgb(231, 233, 234);
+    border-radius: 5px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    border: none;
+    box-sizing: border-box;
+    outline: none;
+    padding: 10px 20px;
+}
+
+.timeline-modal-top-area {
+    display: flex;
+    align-items: center;
+}
+
+.timeline-modal-close-button {
+    height: 35px;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #009da3;
+    cursor: pointer;
+}
+
+.timeline-new-pops-contents {
+    height: 300px;
+    width: 100%;
+    font-size: 14px;
+    line-height: 1.3rem;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    box-sizing: border-box;
+    resize: none;
+    outline: none;
+    font-family: "Segoe UI", Meiryo, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
