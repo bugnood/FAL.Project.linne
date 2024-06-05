@@ -76,7 +76,6 @@
     opacity: 0.7;
 }
 
-/* ボタンのカウント表示 */
 .like-button span,
 .favorite-button span {
     margin-left: 5px;
@@ -113,6 +112,15 @@
     box-sizing: border-box;
     outline: none;
     padding: 10px 20px;
+}
+
+.custom-overlay {
+    position: fixed;
+    inset: 0px;
+    background-color: rgba(91, 112, 131, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .timeline-modal-top-area {
