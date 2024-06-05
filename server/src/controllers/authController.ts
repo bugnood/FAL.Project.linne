@@ -13,14 +13,14 @@ export const login = async (req: Request, res: Response) => {
     try {
         const connection = await mysql.createConnection(dbConfig);
         const [rows] = await connection.execute(
-            'SELECT * FROM users WHERE user_name = ? AND password = ?', [username, password]
+            'SELECT user_id, user_name FROM users WHERE user_name = ? AND password = ?', [username, password]
         );
         await connection.end();
 
         if ((rows as any).length > 0) {
             const user = (rows as any)[0];
-            const token = jwt.sign({ userId: user.user_id, username: user.user_name }, secretKey, { expiresIn: '1h' });
-            res.json({ message: '成功', token, user });
+            const token = jwt.sign({ userId: user.user_id, username: user.user_name }, 'your_jwt_secret');
+            res.json({ message: '成功', user: { userId: user.user_id, username: user.user_name }, token });
         } else {
             res.status(401).json({ message: 'Invalid username or password' });
         }
