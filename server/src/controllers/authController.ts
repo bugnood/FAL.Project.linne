@@ -1,7 +1,10 @@
 import { Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
+import jwt from 'jsonwebtoken';
 import mysql from 'mysql2/promise';
 import dbConfig from '../config/dbConfig';
+
+const secretKey = 'your_secret_key';
 
 // ログイン処理
 export const login = async (req: Request, res: Response) => {
@@ -15,7 +18,9 @@ export const login = async (req: Request, res: Response) => {
         await connection.end();
 
         if ((rows as any).length > 0) {
-            res.json({ message: '成功' });
+            const user = (rows as any)[0];
+            const token = jwt.sign({ userId: user.user_id, username: user.user_name }, secretKey, { expiresIn: '1h' });
+            res.json({ message: '成功', token, user });
         } else {
             res.status(401).json({ message: 'Invalid username or password' });
         }

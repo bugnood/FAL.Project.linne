@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Input from '../components/input/Input';
 import Button from '../components/button/Button';
+import { useUser } from '../contexts/UserContext';
 import '../style/login.css';
 
 const Login: React.FC = () => {
@@ -10,21 +11,23 @@ const Login: React.FC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const { setUser } = useUser();
 
     // ログイン処理
     const handleLogin = async (event: React.FormEvent) => {
         event.preventDefault();
         try {
             const response = await axios.post('http://localhost:5002/api/auth/login', { username, password });
-            // setMessage(response.data.message);
-            if (response != null) {
+            if (response.data) {
+                setUser({ userId: response.data.user.user_id, username: response.data.user.user_name });
+                localStorage.setItem('token', response.data.token);
                 navigate('/timeline');
             }
         } catch (error) {
             if (axios.isAxiosError(error)) {
-                // setMessage(error.response?.data.message || 'An error occurred');
+                console.error(error.response?.data.message || 'An error occurred');
             } else {
-                // setMessage('An error occurred');
+                console.error('An error occurred');
             }
         }
     };
