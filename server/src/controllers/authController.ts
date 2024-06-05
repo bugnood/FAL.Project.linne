@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { v4 as uuidv4 } from 'uuid';
 import mysql from 'mysql2/promise';
 import dbConfig from '../config/dbConfig';
 
@@ -31,7 +32,7 @@ export const register = async (req: Request, res: Response) => {
     try {
         const created_at = new Date();
         const updated_at = new Date();
-        const user_identification_code = 'aaaaa';
+        const user_identification_code = uuidv4();
         const connection = await mysql.createConnection(dbConfig);
         const [result] = await connection.execute(
             'INSERT INTO users (user_identification_code, user_name, password, created_at, updated_at) VALUES (?, ?, ?, ?, ?)',
