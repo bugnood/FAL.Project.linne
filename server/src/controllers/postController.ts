@@ -31,23 +31,6 @@ export const updatePost = async (req: Request, res: Response) => {
 };
 
 // 新規投稿を作成する
-// export const createPost = async (req: Request, res: Response) => {
-//     const { user_id, content, media, hashtags, mentions } = req.body;
-
-//     try {
-//         const connection = await mysql.createConnection(dbConfig);
-//         const [result] = await connection.execute(
-//             'INSERT INTO posts (user_id, content, media, hashtags, mentions) VALUES (?, ?, ?, ?, ?)',
-//             [user_id, content, media, hashtags, mentions]
-//         );
-//         await connection.end();
-//         res.json({ message: 'Post created successfully', post_id: (result as any).insertId });
-//     } catch (error) {
-//         console.error('Database query error:', error);
-//         res.status(500).json({ message: 'Internal server error' });
-//     }
-// };
-
 export const createPost = async (req: Request, res: Response) => {
     const { newPopsContents } = req.body;
     console.log(newPopsContents);

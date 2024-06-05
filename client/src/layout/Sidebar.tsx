@@ -9,12 +9,12 @@ const Sidebar: React.FC = () => {
         <div className='sidebar-panel-heading'>メニュー</div>
         <div className='sidebar-list-group'>
           <Link to="/timeline">タイムライン</Link>
-          <Link to="/create-post">新規投稿</Link>
+          {/* <Link to="/create-post">新規投稿</Link> */}
           <Link to="">プロフィール（近日実装）</Link>
           <Link to="">お気に入りの投稿（近日実装）</Link>
           <Link to="">注目している投稿（近日実装）</Link>
           <Link to="">メッセージ（近日実装）</Link>
-          <Link to="">設定</Link>
+          <Link to="">設定（近日実装）</Link>
           {/* <Link to="/register">新規登録</Link> */}
           {/* <Link to="/">ログイン画面</Link> */}
         </div>
