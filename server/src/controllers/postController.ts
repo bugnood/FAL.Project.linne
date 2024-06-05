@@ -37,14 +37,13 @@ export const updatePost = async (req: Request, res: Response) => {
 
 // 新規投稿を作成する
 export const createPost = async (req: Request, res: Response) => {
-    const { newPopsContents } = req.body;
-    console.log(newPopsContents);
+    const { userId, newPopsContents } = req.body;
 
     try {
         const connection = await mysql.createConnection(dbConfig);
         const [result] = await connection.execute(
             'INSERT INTO pops (user_id, content, image1, image2, image3, image4, tags, favorites_count, attention_count, bookmarks_count) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-            [1, newPopsContents, null, null, null, null, null, 0, 0, 0]
+            [userId, newPopsContents, null, null, null, null, null, 0, 0, 0]
         );
         await connection.end();
         res.json({ message: 'Post created successfully', post_no: (result as any).insertId });

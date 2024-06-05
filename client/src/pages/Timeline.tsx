@@ -2,32 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
 import { CiCirclePlus } from "react-icons/ci";
-import { IoIosCloseCircle } from "react-icons/io";
 import ReactModal from 'react-modal';
 import axios from 'axios';
 import '../style/timeline.css';
 import miraiSpectrumIcon from '../assets/mirai-spectrum_icon.png';
 
 const Timeline: React.FC = () => {
-
-    // タイムライン表示
     const [posts, setPosts] = useState<any[]>([]);
-
-    // 投稿内容の状態を管理
     const [newPopsContents, setNewPopsContents] = useState<string>('');
-
-    // モーダルの状態を管理
     const [popsModalIsOpen, setPopsModalIsOpen] = useState(false);
-
-    // ログインモーダルを開く関数
-    const openPopsModal = () => {
-        setPopsModalIsOpen(true);
-    };
-
-    // 登録モーダルを閉じる関数
-    const closePopsModal = () => {
-        setPopsModalIsOpen(false);
-    };
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchPosts();
@@ -35,14 +19,10 @@ const Timeline: React.FC = () => {
 
     const fetchPosts = async () => {
         try {
-            const response = await fetch('http://localhost:5002/api/posts');
-            if (!response.ok) {
-                throw new Error('Failed to fetch posts');
-            }
-            const data = await response.json();
-            setPosts(data);
+            const response = await axios.get('http://localhost:5002/api/posts');
+            setPosts(response.data);
         } catch (error) {
-            console.error(error);
+            console.error('Failed to fetch posts', error);
             setPosts([]);
         }
     };
@@ -50,42 +30,45 @@ const Timeline: React.FC = () => {
     const handleFavorite = async (index: number) => {
         const post_no = posts[index].post_no;
         try {
-            const response = await fetch(`http://localhost:5002/api/posts/favorite/${post_no}`, {
-                method: 'PUT',
-            });
-            if (!response.ok) {
-                throw new Error('Failed to update favorite count');
-            }
-            const data = await response.json();
+            const response = await axios.put(`http://localhost:5002/api/posts/favorite/${post_no}`);
             setPosts((prevPosts) => {
                 const newPosts = [...prevPosts];
-                newPosts[index].favorites_count = data.favorites_count;
+                newPosts[index].favorites_count = response.data.favorites_count;
                 return newPosts;
             });
         } catch (error) {
-            console.error(error);
+            console.error('Failed to update favorite count', error);
         }
     };
 
-    const navigate = useNavigate();
+    const openPopsModal = () => {
+        setPopsModalIsOpen(true);
+    };
 
-    // 新規投稿処理
+    const closePopsModal = () => {
+        setPopsModalIsOpen(false);
+    };
+
     const handleNewCreatePops = async (event: React.FormEvent) => {
         event.preventDefault();
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        if (!user.userId) {
+            console.error('User ID not found');
+            return;
+        }
+
         try {
-            const response = await axios.post('http://localhost:5002/api/posts/', { newPopsContents });
-            // setMessage(response.data.message);
+            const response = await axios.post('http://localhost:5002/api/posts/', {
+                userId: user.userId,
+                newPopsContents
+            });
             if (response != null) {
                 closePopsModal();
                 setNewPopsContents('');
                 fetchPosts();
             }
         } catch (error) {
-            if (axios.isAxiosError(error)) {
-                // setMessage(error.response?.data.message || 'An error occurred');
-            } else {
-                // setMessage('An error occurred');
-            }
+            console.error('Failed to create post', error);
         }
     };
 
