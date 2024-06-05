@@ -254,5 +254,12 @@
 @media (max-width: 768px) {
     .top-container {
         padding: 20px;
+        box-sizing: border-box;
+        align-content: center;
+        align-content: flex-start;
+    }
+
+    .top-welcome-message {
+        font-size: 2.2rem;
     }
 }

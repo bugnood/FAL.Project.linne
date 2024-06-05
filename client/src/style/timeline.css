@@ -103,6 +103,7 @@
 
 .timeline-new-pops-modal {
     height: 600px;
+    max-width: 95%;
     width: 400px;
     background-color: rgb(231, 233, 234);
     border-radius: 5px;
