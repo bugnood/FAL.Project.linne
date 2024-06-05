@@ -6,7 +6,12 @@ import dbConfig from '../config/dbConfig';
 export const getPosts = async (req: Request, res: Response) => {
     try {
         const connection = await mysql.createConnection(dbConfig);
-        const [rows] = await connection.execute('SELECT * FROM pops ORDER BY created_at DESC');
+        const [rows] = await connection.execute(`
+            SELECT p.*, u.user_name, u.user_identification_code
+            FROM pops p
+            JOIN users u ON p.user_id = u.user_id
+            ORDER BY p.created_at DESC
+        `);
         await connection.end();
         res.json(rows);
     } catch (error) {

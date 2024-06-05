@@ -99,8 +99,8 @@ const Timeline: React.FC = () => {
                         </div>
                         <div className='post-right-area'>
                             <div className='user-info'>
-                                <p className='user-name'>ユーザー名</p>
-                                <p className='user-id'>ユーザーID</p>
+                                <p className='user-name'>{post.user_name}</p>
+                                <p className='user-id'>@{post.user_identification_code}</p>
                             </div>
                             <p className='post-content'>{post.content}</p>
                             <div className='reaction-button'>
