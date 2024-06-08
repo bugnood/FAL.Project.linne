@@ -142,8 +142,12 @@ aside {
 
 @media (max-width: 768px) {
 
-  html,
-  body {
-    overflow: auto;
+  main {
+    width: 95%;
   }
+
+  aside {
+    display: none;
+  }
+
 }
