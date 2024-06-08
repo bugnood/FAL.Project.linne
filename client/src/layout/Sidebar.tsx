@@ -10,7 +10,7 @@ const Sidebar: React.FC = () => {
         <div className='sidebar-list-group'>
           <Link to="/timeline">タイムライン</Link>
           {/* <Link to="/create-post">新規投稿</Link> */}
-          <Link to="">プロフィール（近日実装）</Link>
+          <Link to="/profile">プロフィール</Link>
           <Link to="">お気に入りの投稿（近日実装）</Link>
           <Link to="">注目している投稿（近日実装）</Link>
           <Link to="">メッセージ（近日実装）</Link>
